@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Built-By: sriram
+Class-Path: lib/antlr4-runtime-4.5.3.jar
+Build-Jdk: 1.8.0_60
+Created-By: Maven Integration for Eclipse
+Main-Class: ANTLR_TUTORIAL.App
+

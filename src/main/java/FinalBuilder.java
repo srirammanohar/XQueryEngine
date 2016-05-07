@@ -194,18 +194,13 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitRp_descrp(xmlParser.Rp_descrpContext ctx) { 
 		
 		
-		
 		 xqRelativePath xql  = (xqRelativePath)map.get(ctx.relative_path().get(0));
 		 xqRelativePath xqr = (xqRelativePath) map.get(ctx.relative_path().get(1));
 		 System.out.println(xqr.tagname);
 		 String slash = "//";
 		 xqRelativePath xqrp = new xqRelativePath(xql,slash,xqr);
          System.out.println("Sriram is testing relative path 222");
-		 map.put(ctx,xqrp);
-	
-		
-		
-		
+		 map.put(ctx,xqrp);		
 		
 	}
 	/**
@@ -220,6 +215,7 @@ public class FinalBuilder extends xmlBaseListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRp_dot(xmlParser.Rp_dotContext ctx) {
+		
 		xqRelativePath rp=new xqRelativePath(ctx.getText());
 		System.out.println(ctx.getText()+"   dot");
 		map.put(ctx,rp );
@@ -354,7 +350,12 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilter_rp(xmlParser.Filter_rpContext ctx) { }
+	@Override public void exitFilter_rp(xmlParser.Filter_rpContext ctx) { 
+		
+		xqRelativePath rp=(xqRelativePath) map.get(ctx.relative_path());
+		xqFilter xqf= new xqFilter(rp);
+		map.put(ctx,xqf);
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -366,7 +367,17 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilter_eqeq(xmlParser.Filter_eqeqContext ctx) { }
+	@Override public void exitFilter_eqeq(xmlParser.Filter_eqeqContext ctx) {
+		xqRelativePath rpl = (xqRelativePath)map.get(ctx.relative_path().get(0));
+		xqRelativePath rpr = (xqRelativePath)map.get(ctx.relative_path().get(1));
+		String str = ctx.getChild(1).getText();
+		 xqFilter xqFil =  new xqFilter(rpl,rpr,str);
+		map.put(ctx, xqFil);
+
+		
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -381,21 +392,15 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitFilter_and(xmlParser.Filter_andContext ctx) {
 		
 		
-		 xqRelativePath xql  = (xqRelativePath)map.get(ctx.filter().get(0));
+		 xqFilter xql  = (xqFilter)map.get(ctx.filter().get(0));
+		 xqFilter xqr  = (xqFilter)map.get(ctx.filter().get(1));
 
-		 xqRelativePath xqr  = (xqRelativePath)map.get(ctx.filter().get(1));
-
-		System.out.println(xql);
+		System.out.println(xql + "left");
 		System.out.println(xqr);
 		String str = ctx.getChild(1).getText();
 		System.out.println(str + "in filter and");
        xqFilter xqFil =  new xqFilter(xql,xqr,str);
-       map.put(ctx, xqFil);
-		
-		
-		
-		
-		
+       map.put(ctx, xqFil);	
 		
 	}
 	/**
@@ -409,7 +414,17 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilter_eq(xmlParser.Filter_eqContext ctx) { }
+	@Override public void exitFilter_eq(xmlParser.Filter_eqContext ctx) { 
+		
+		xqRelativePath rpl = (xqRelativePath)map.get(ctx.relative_path().get(0));
+		xqRelativePath rpr = (xqRelativePath)map.get(ctx.relative_path().get(1));
+		String str = ctx.getChild(1).getText();
+		
+		 xqFilter xqFil =  new xqFilter(rpl,rpr,str);
+		map.put(ctx, xqFil);
+		System.out.println("This is eq filter test " + rpl.tagname);
+		System.out.println("This is eq filter test " + rpr.tagname);
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -421,7 +436,18 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilter_is(xmlParser.Filter_isContext ctx) { }
+	@Override public void exitFilter_is(xmlParser.Filter_isContext ctx) { 
+		
+		xqRelativePath rpl = (xqRelativePath)map.get(ctx.relative_path().get(0));
+		xqRelativePath rpr = (xqRelativePath)map.get(ctx.relative_path().get(1));
+		String str = ctx.getChild(1).getText();
+		
+		 xqFilter xqFil =  new xqFilter(rpl,rpr,str);
+		map.put(ctx, xqFil);
+		System.out.println("This is eq filter test " + rpl.tagname);
+		System.out.println("This is eq filter test " + rpr.tagname);
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -433,7 +459,17 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilter_simple(xmlParser.Filter_simpleContext ctx) { }
+	@Override public void exitFilter_simple(xmlParser.Filter_simpleContext ctx) { 
+		
+		 xqFilter xql  = (xqFilter)map.get(ctx.filter());
+		System.out.println(xql +  "Node in simple");
+		System.out.println(xql);
+		String str = ctx.getChild(1).getText();
+		System.out.println(str + "in filter simple");
+       xqFilter xqFil =  new xqFilter(xql);
+       map.put(ctx, xqFil);		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -445,7 +481,18 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilter_equal(xmlParser.Filter_equalContext ctx) { }
+	@Override public void exitFilter_equal(xmlParser.Filter_equalContext ctx) {
+		
+		xqRelativePath rpl = (xqRelativePath)map.get(ctx.relative_path().get(0));
+		xqRelativePath rpr = (xqRelativePath)map.get(ctx.relative_path().get(1));
+		String str = ctx.getChild(1).getText();
+		
+		 xqFilter xqFil =  new xqFilter(rpl,rpr,str);
+		map.put(ctx, xqFil);
+		System.out.println("This is eq filter test " + rpl.tagname);
+		System.out.println("This is eq filter test " + rpr.tagname);	
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -459,18 +506,16 @@ public class FinalBuilder extends xmlBaseListener {
 	 */
 	@Override public void exitFilter_or(xmlParser.Filter_orContext ctx) {
 		
-		 xqRelativePath xql  = (xqRelativePath)map.get(ctx.filter().get(0));
+		 xqFilter xql  = (xqFilter)map.get(ctx.filter().get(0));
 
-		 xqRelativePath xqr  = (xqRelativePath)map.get(ctx.filter().get(1));
+		 xqFilter xqr  = (xqFilter)map.get(ctx.filter().get(1));
 
 		System.out.println(xql);
 		System.out.println(xqr);
 		String str = ctx.getChild(1).getText();
 		System.out.println(str + "in filter or");
         xqFilter xqFil =  new xqFilter(xql,xqr,str);
-        map.put(ctx, xqFil);
-		
-		
+        map.put(ctx, xqFil);	
 		
 	}
 	/**
@@ -484,7 +529,14 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilter_not(xmlParser.Filter_notContext ctx) { }
+	@Override public void exitFilter_not(xmlParser.Filter_notContext ctx) {
+		 xqFilter xql  = (xqFilter)map.get(ctx.filter());
+		 String str = ctx.getChild(0).getText();
+		 xqFilter xqFil =  new xqFilter(xql,str);
+ 
+		 map.put(ctx, xqFil);		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *

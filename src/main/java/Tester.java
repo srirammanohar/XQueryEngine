@@ -9,7 +9,7 @@ public class Tester {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stu
 		
-	    String Query= "doc(sample.xml)/(swetha/krish[set and get])";
+	    String Query= "doc(sample.xml)/(swetha/krish[ put = set] )";
 	    System.out.println("This sucks");
 
 	    ANTLRInputStream input = new ANTLRInputStream(Query);

@@ -33,7 +33,7 @@ public class FinalBuilder extends xmlBaseListener {
 		 fileName file = (fileName)map.get(ctx.fileName());
 		 xqRelativePath rp = (xqRelativePath) map.get(ctx.relative_path());
 		 xqAbsolutePath xap = new xqAbsolutePath(file,rp);
-
+         System.out.println("Sriram is testing");
 		 map.put(ctx,xap);
 		
 		

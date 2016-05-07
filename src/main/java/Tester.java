@@ -1,6 +1,8 @@
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+
 
 public class Tester {
 
@@ -33,7 +35,15 @@ public class Tester {
 	        String query = tree.getText();
 
 	        String filename = tree.getChild(2).getText();
-
+	       
+	         
+	           
+	        //Absolute_pathContext absolute_pathContext=parser.absolute_path();
+	        System.out.println(tree.toStringTree(parser)); 
+	        ParseTreeWalker walker=new ParseTreeWalker();
+	        xmlBaseListener listener=new xmlBaseListener();
+	        FinalBuilder xmlwalk= new FinalBuilder();
+	        walker.walk(xmlwalk, tree);
 
 		
 

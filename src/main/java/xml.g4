@@ -20,7 +20,7 @@ fileName		: (headerString)			#file_header
 				;
 
 relative_path	: tagName 									#rp_tag	
-				| '∗' 										#rp_anychild
+				| '*' 										#rp_anychild
 				| '.' 										#rp_dot
 				| '..'										#rp_dotdot
 				| 'text()'									#rp_text

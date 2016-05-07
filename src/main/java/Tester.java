@@ -7,29 +7,30 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 public class Tester {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		
-	    String Query= "doc(sample.xml)/student";
+	    String Query= "doc(sample.xml)/(swetha/krish[set and get])";
 	    System.out.println("This sucks");
 
 	    ANTLRInputStream input = new ANTLRInputStream(Query);
-	    System.out.println("This sucks");
+	    //System.out.println("This sucks");
 
 	    xmlLexer lexer = new xmlLexer(input);
-	    System.out.println("This sucks");
+	    //System.out.println("This sucks");
 
 	    CommonTokenStream tokens = new CommonTokenStream(lexer);
 
 	    lexer.reset();
-	    System.out.println("This sucks");
+	    //System.out.println("This sucks");
 
 	    xmlParser parser = new xmlParser(tokens);
-	    System.out.println("This sucks");
+	    //System.out.println("This sucks");
 
 
 	        ParseTree tree = parser.absolute_path(); 
 
-		    System.out.println("This sucks3");
+		   System.out.println(tree.toStringTree(parser));
+	        
 
 
 	        String query = tree.getText();

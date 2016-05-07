@@ -38,7 +38,7 @@ public class xmlParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'/'", "'//'", "'doc'", "'document'", "'DOC'", "'DOCUMENT'", "'∗'", 
+		null, "'/'", "'//'", "'doc'", "'document'", "'DOC'", "'DOCUMENT'", "'*'", 
 		"'.'", "'..'", "'text()'", "'@'", "'('", "')'", "'['", "']'", "','", "'='", 
 		"'eq'", "'=='", "'is'", "'and'", "'or'", "'not'", "'for'", "'where'", 
 		"'return'", "'<'", "'>'", "'{'", "'}'", "'</'", "'join'", "'in'", "'let'", 

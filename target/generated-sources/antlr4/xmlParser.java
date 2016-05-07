@@ -25,7 +25,7 @@ public class xmlParser extends Parser {
 	public static final String[] tokenNames = {
 		"<INVALID>", "'/'", "'some'", "'text()'", "'return'", "'{'", "'DOC'", 
 		"'..'", "'}'", "'='", "'for'", "':='", "'$'", "'satisfies'", "'eq'", "'('", 
-		"'is'", "','", "'join'", "'.'", "'DOCUMENT'", "'</'", "'['", "'∗'", "'<'", 
+		"'is'", "'*'", "','", "'join'", "'.'", "'DOCUMENT'", "'</'", "'['", "'<'", 
 		"'=='", "'//'", "']'", "'>'", "'or'", "'@'", "'let'", "'where'", "'in'", 
 		"'document'", "')'", "'and'", "'not'", "'doc'", "'empty'", "AlphaNumeric", 
 		"Id", "String_constant", "Ws", "WHITESPACE"
@@ -258,7 +258,7 @@ public class xmlParser extends Parser {
 			{
 			setState(75);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__33) | (1L << T__19) | (1L << T__5) | (1L << T__1))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__33) | (1L << T__18) | (1L << T__5) | (1L << T__1))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			consume();
@@ -544,20 +544,20 @@ public class xmlParser extends Parser {
 				setState(82); tagName();
 				}
 				break;
-			case T__16:
+			case T__22:
 				{
 				_localctx = new Rp_anychildContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(83); match(T__16);
+				setState(83); match(T__22);
 				}
 				break;
-			case T__20:
+			case T__19:
 				{
 				_localctx = new Rp_dotContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(84); match(T__20);
+				setState(84); match(T__19);
 				}
 				break;
 			case T__32:
@@ -635,7 +635,7 @@ public class xmlParser extends Parser {
 						pushNewRecursionContext(_localctx, _startState, RULE_relative_path);
 						setState(101);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(102); match(T__22);
+						setState(102); match(T__21);
 						setState(103); relative_path(2);
 						}
 						break;
@@ -645,7 +645,7 @@ public class xmlParser extends Parser {
 						pushNewRecursionContext(_localctx, _startState, RULE_relative_path);
 						setState(104);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(105); match(T__17);
+						setState(105); match(T__16);
 						setState(106); filter(0);
 						setState(107); match(T__12);
 						}
@@ -1508,7 +1508,7 @@ public class xmlParser extends Parser {
 				}
 				break;
 			case T__33:
-			case T__19:
+			case T__18:
 			case T__5:
 			case T__1:
 				{
@@ -1539,7 +1539,7 @@ public class xmlParser extends Parser {
 				setState(184); match(T__34);
 				setState(185); xquery(0);
 				setState(186); match(T__31);
-				setState(187); match(T__18);
+				setState(187); match(T__17);
 				setState(188); ((X_nodeContext)_localctx).rt = match(Id);
 				setState(189); match(T__11);
 				}
@@ -1569,19 +1569,19 @@ public class xmlParser extends Parser {
 				setState(198); returnClause();
 				}
 				break;
-			case T__21:
+			case T__20:
 				{
 				_localctx = new X_joinContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(200); match(T__21);
+				setState(200); match(T__20);
 				setState(201); match(T__24);
 				setState(202); ((X_joinContext)_localctx).left = xquery(0);
-				setState(203); match(T__22);
+				setState(203); match(T__21);
 				setState(204); ((X_joinContext)_localctx).right = xquery(0);
-				setState(205); match(T__22);
+				setState(205); match(T__21);
 				setState(206); ((X_joinContext)_localctx).leftlist = list();
-				setState(207); match(T__22);
+				setState(207); match(T__21);
 				setState(208); ((X_joinContext)_localctx).rightlist = list();
 				setState(209); match(T__4);
 				}
@@ -1607,7 +1607,7 @@ public class xmlParser extends Parser {
 						pushNewRecursionContext(_localctx, _startState, RULE_xquery);
 						setState(213);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(214); match(T__22);
+						setState(214); match(T__21);
 						setState(215); ((XIndContext)_localctx).right = xquery(8);
 						}
 						break;
@@ -1679,7 +1679,7 @@ public class xmlParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(227); match(T__17);
+			setState(227); match(T__16);
 			setState(238);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -1690,10 +1690,10 @@ public class xmlParser extends Parser {
 				setState(233);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==T__22) {
+				while (_la==T__21) {
 					{
 					{
-					setState(229); match(T__22);
+					setState(229); match(T__21);
 					setState(230); id();
 					}
 					}
@@ -1806,10 +1806,10 @@ public class xmlParser extends Parser {
 			setState(255);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__22) {
+			while (_la==T__21) {
 				{
 				{
-				setState(248); match(T__22);
+				setState(248); match(T__21);
 				setState(249); var();
 				setState(250); match(T__6);
 				setState(251); path();
@@ -1883,7 +1883,7 @@ public class xmlParser extends Parser {
 			setState(263);
 			switch (_input.LA(1)) {
 			case T__33:
-			case T__19:
+			case T__18:
 			case T__5:
 			case T__1:
 				_localctx = new PathApContext(_localctx);
@@ -2140,7 +2140,7 @@ public class xmlParser extends Parser {
 				setState(287); match(T__24);
 				setState(288); returnJ(0);
 				setState(289); match(T__4);
-				setState(290); match(T__22);
+				setState(290); match(T__21);
 				setState(291); match(T__24);
 				setState(292); returnJ(0);
 				setState(293); match(T__4);
@@ -2154,7 +2154,7 @@ public class xmlParser extends Parser {
 				setState(298); match(T__34);
 				setState(299); returnJ(0);
 				setState(300); match(T__31);
-				setState(301); match(T__18);
+				setState(301); match(T__17);
 				setState(302); ((ReturnJContext)_localctx).rt = match(Id);
 				setState(303); match(T__11);
 				}
@@ -2174,7 +2174,7 @@ public class xmlParser extends Parser {
 					pushNewRecursionContext(_localctx, _startState, RULE_returnJ);
 					setState(307);
 					if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-					setState(308); match(T__22);
+					setState(308); match(T__21);
 					setState(309); returnJ(3);
 					}
 					} 
@@ -2237,10 +2237,10 @@ public class xmlParser extends Parser {
 			setState(326);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__22) {
+			while (_la==T__21) {
 				{
 				{
-				setState(319); match(T__22);
+				setState(319); match(T__21);
 				setState(320); var();
 				setState(321); match(T__6);
 				setState(322); xquery(0);
@@ -2304,10 +2304,10 @@ public class xmlParser extends Parser {
 			setState(340);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__22) {
+			while (_la==T__21) {
 				{
 				{
-				setState(333); match(T__22);
+				setState(333); match(T__21);
 				setState(334); var();
 				setState(335); match(T__28);
 				setState(336); xquery(0);
@@ -2595,10 +2595,10 @@ public class xmlParser extends Parser {
 				setState(361);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==T__22) {
+				while (_la==T__21) {
 					{
 					{
-					setState(354); match(T__22);
+					setState(354); match(T__21);
 					setState(355); var();
 					setState(356); match(T__6);
 					setState(357); xquery(0);
@@ -2861,7 +2861,7 @@ public class xmlParser extends Parser {
 		"\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\5\32\u018d"+
 		"\n\32\3\32\3\32\3\32\3\32\3\32\3\32\7\32\u0195\n\32\f\32\16\32\u0198\13"+
 		"\32\3\33\3\33\3\33\3\33\2\b\n\20\34&(\62\34\2\4\6\b\n\f\16\20\22\24\26"+
-		"\30\32\34\36 \"$&(*,.\60\62\64\2\5\6\2\b\b\26\26$$((\4\2\3\3\34\34\4\2"+
+		"\30\32\34\36 \"$&(*,.\60\62\64\2\5\6\2\b\b\27\27$$((\4\2\3\3\34\34\4\2"+
 		"\13\13\20\20\u01ba\2;\3\2\2\2\4K\3\2\2\2\6M\3\2\2\2\bQ\3\2\2\2\n_\3\2"+
 		"\2\2\ft\3\2\2\2\16v\3\2\2\2\20\u0090\3\2\2\2\22\u009d\3\2\2\2\24\u009f"+
 		"\3\2\2\2\26\u00a1\3\2\2\2\30\u00a3\3\2\2\2\32\u00a5\3\2\2\2\34\u00d5\3"+
@@ -2873,11 +2873,11 @@ public class xmlParser extends Parser {
 		"\2\2BC\5\n\6\2CL\3\2\2\2DE\5\6\4\2EF\5\26\f\2FG\5\b\5\2GH\5\30\r\2HI\7"+
 		"\34\2\2IJ\5\n\6\2JL\3\2\2\2K=\3\2\2\2KD\3\2\2\2L\5\3\2\2\2MN\t\2\2\2N"+
 		"\7\3\2\2\2OR\5\22\n\2PR\5\24\13\2QO\3\2\2\2QP\3\2\2\2R\t\3\2\2\2ST\b\6"+
-		"\1\2T`\5\f\7\2U`\7\31\2\2V`\7\25\2\2W`\7\t\2\2X`\7\5\2\2YZ\7 \2\2Z`\5"+
+		"\1\2T`\5\f\7\2U`\7\23\2\2V`\7\26\2\2W`\7\t\2\2X`\7\5\2\2YZ\7 \2\2Z`\5"+
 		"\16\b\2[\\\7\21\2\2\\]\5\n\6\2]^\7%\2\2^`\3\2\2\2_S\3\2\2\2_U\3\2\2\2"+
 		"_V\3\2\2\2_W\3\2\2\2_X\3\2\2\2_Y\3\2\2\2_[\3\2\2\2`q\3\2\2\2ab\f\6\2\2"+
-		"bc\7\3\2\2cp\5\n\6\7de\f\5\2\2ef\7\34\2\2fp\5\n\6\6gh\f\3\2\2hi\7\23\2"+
-		"\2ip\5\n\6\4jk\f\4\2\2kl\7\30\2\2lm\5\20\t\2mn\7\35\2\2np\3\2\2\2oa\3"+
+		"bc\7\3\2\2cp\5\n\6\7de\f\5\2\2ef\7\34\2\2fp\5\n\6\6gh\f\3\2\2hi\7\24\2"+
+		"\2ip\5\n\6\4jk\f\4\2\2kl\7\31\2\2lm\5\20\t\2mn\7\35\2\2np\3\2\2\2oa\3"+
 		"\2\2\2od\3\2\2\2og\3\2\2\2oj\3\2\2\2ps\3\2\2\2qo\3\2\2\2qr\3\2\2\2r\13"+
 		"\3\2\2\2sq\3\2\2\2tu\5\24\13\2u\r\3\2\2\2vw\5\24\13\2w\17\3\2\2\2xy\b"+
 		"\t\1\2yz\7\'\2\2z\u0091\5\20\t\3{\u0091\5\n\6\2|}\5\n\6\2}~\7\13\2\2~"+
@@ -2901,28 +2901,28 @@ public class xmlParser extends Parser {
 		"\u00b4\7\21\2\2\u00b4\u00b5\5\34\17\2\u00b5\u00b6\7%\2\2\u00b6\u00d6\3"+
 		"\2\2\2\u00b7\u00b8\7\32\2\2\u00b8\u00b9\7+\2\2\u00b9\u00ba\7\36\2\2\u00ba"+
 		"\u00bb\7\7\2\2\u00bb\u00bc\5\34\17\2\u00bc\u00bd\7\n\2\2\u00bd\u00be\7"+
-		"\27\2\2\u00be\u00bf\7+\2\2\u00bf\u00c0\7\36\2\2\u00c0\u00d6\3\2\2\2\u00c1"+
+		"\30\2\2\u00be\u00bf\7+\2\2\u00bf\u00c0\7\36\2\2\u00c0\u00d6\3\2\2\2\u00c1"+
 		"\u00c3\5*\26\2\u00c2\u00c4\5,\27\2\u00c3\u00c2\3\2\2\2\u00c3\u00c4\3\2"+
 		"\2\2\u00c4\u00c6\3\2\2\2\u00c5\u00c7\5.\30\2\u00c6\u00c5\3\2\2\2\u00c6"+
 		"\u00c7\3\2\2\2\u00c7\u00c8\3\2\2\2\u00c8\u00c9\5\60\31\2\u00c9\u00d6\3"+
-		"\2\2\2\u00ca\u00cb\7\24\2\2\u00cb\u00cc\7\21\2\2\u00cc\u00cd\5\34\17\2"+
-		"\u00cd\u00ce\7\23\2\2\u00ce\u00cf\5\34\17\2\u00cf\u00d0\7\23\2\2\u00d0"+
-		"\u00d1\5\36\20\2\u00d1\u00d2\7\23\2\2\u00d2\u00d3\5\36\20\2\u00d3\u00d4"+
+		"\2\2\2\u00ca\u00cb\7\25\2\2\u00cb\u00cc\7\21\2\2\u00cc\u00cd\5\34\17\2"+
+		"\u00cd\u00ce\7\24\2\2\u00ce\u00cf\5\34\17\2\u00cf\u00d0\7\24\2\2\u00d0"+
+		"\u00d1\5\36\20\2\u00d1\u00d2\7\24\2\2\u00d2\u00d3\5\36\20\2\u00d3\u00d4"+
 		"\7%\2\2\u00d4\u00d6\3\2\2\2\u00d5\u00ac\3\2\2\2\u00d5\u00b0\3\2\2\2\u00d5"+
 		"\u00b1\3\2\2\2\u00d5\u00b2\3\2\2\2\u00d5\u00b3\3\2\2\2\u00d5\u00b7\3\2"+
 		"\2\2\u00d5\u00c1\3\2\2\2\u00d5\u00ca\3\2\2\2\u00d6\u00e2\3\2\2\2\u00d7"+
-		"\u00d8\f\t\2\2\u00d8\u00d9\7\23\2\2\u00d9\u00e1\5\34\17\n\u00da\u00db"+
+		"\u00d8\f\t\2\2\u00d8\u00d9\7\24\2\2\u00d9\u00e1\5\34\17\n\u00da\u00db"+
 		"\f\b\2\2\u00db\u00dc\7\3\2\2\u00dc\u00e1\5\n\6\2\u00dd\u00de\f\7\2\2\u00de"+
 		"\u00df\7\34\2\2\u00df\u00e1\5\n\6\2\u00e0\u00d7\3\2\2\2\u00e0\u00da\3"+
 		"\2\2\2\u00e0\u00dd\3\2\2\2\u00e1\u00e4\3\2\2\2\u00e2\u00e0\3\2\2\2\u00e2"+
-		"\u00e3\3\2\2\2\u00e3\35\3\2\2\2\u00e4\u00e2\3\2\2\2\u00e5\u00f0\7\30\2"+
-		"\2\u00e6\u00eb\5 \21\2\u00e7\u00e8\7\23\2\2\u00e8\u00ea\5 \21\2\u00e9"+
+		"\u00e3\3\2\2\2\u00e3\35\3\2\2\2\u00e4\u00e2\3\2\2\2\u00e5\u00f0\7\31\2"+
+		"\2\u00e6\u00eb\5 \21\2\u00e7\u00e8\7\24\2\2\u00e8\u00ea\5 \21\2\u00e9"+
 		"\u00e7\3\2\2\2\u00ea\u00ed\3\2\2\2\u00eb\u00e9\3\2\2\2\u00eb\u00ec\3\2"+
 		"\2\2\u00ec\u00ef\3\2\2\2\u00ed\u00eb\3\2\2\2\u00ee\u00e6\3\2\2\2\u00ef"+
 		"\u00f2\3\2\2\2\u00f0\u00ee\3\2\2\2\u00f0\u00f1\3\2\2\2\u00f1\u00f3\3\2"+
 		"\2\2\u00f2\u00f0\3\2\2\2\u00f3\u00f4\7\35\2\2\u00f4\37\3\2\2\2\u00f5\u00f6"+
 		"\7+\2\2\u00f6!\3\2\2\2\u00f7\u00f8\5\64\33\2\u00f8\u00f9\7#\2\2\u00f9"+
-		"\u0101\5$\23\2\u00fa\u00fb\7\23\2\2\u00fb\u00fc\5\64\33\2\u00fc\u00fd"+
+		"\u0101\5$\23\2\u00fa\u00fb\7\24\2\2\u00fb\u00fc\5\64\33\2\u00fc\u00fd"+
 		"\7#\2\2\u00fd\u00fe\5$\23\2\u00fe\u0100\3\2\2\2\u00ff\u00fa\3\2\2\2\u0100"+
 		"\u0103\3\2\2\2\u0101\u00ff\3\2\2\2\u0101\u0102\3\2\2\2\u0102#\3\2\2\2"+
 		"\u0103\u0101\3\2\2\2\u0104\u010a\5\4\3\2\u0105\u0106\5\64\33\2\u0106\u0107"+
@@ -2935,27 +2935,27 @@ public class xmlParser extends Parser {
 		"\2\2\u011a\u011d\3\2\2\2\u011b\u0119\3\2\2\2\u011b\u011c\3\2\2\2\u011c"+
 		"\'\3\2\2\2\u011d\u011b\3\2\2\2\u011e\u011f\b\25\1\2\u011f\u0134\5$\23"+
 		"\2\u0120\u0134\5\64\33\2\u0121\u0122\7\21\2\2\u0122\u0123\5(\25\2\u0123"+
-		"\u0124\7%\2\2\u0124\u0125\7\23\2\2\u0125\u0126\7\21\2\2\u0126\u0127\5"+
+		"\u0124\7%\2\2\u0124\u0125\7\24\2\2\u0125\u0126\7\21\2\2\u0126\u0127\5"+
 		"(\25\2\u0127\u0128\7%\2\2\u0128\u0134\3\2\2\2\u0129\u012a\7\32\2\2\u012a"+
 		"\u012b\7+\2\2\u012b\u012c\7\36\2\2\u012c\u012d\7\7\2\2\u012d\u012e\5("+
-		"\25\2\u012e\u012f\7\n\2\2\u012f\u0130\7\27\2\2\u0130\u0131\7+\2\2\u0131"+
+		"\25\2\u012e\u012f\7\n\2\2\u012f\u0130\7\30\2\2\u0130\u0131\7+\2\2\u0131"+
 		"\u0132\7\36\2\2\u0132\u0134\3\2\2\2\u0133\u011e\3\2\2\2\u0133\u0120\3"+
 		"\2\2\2\u0133\u0121\3\2\2\2\u0133\u0129\3\2\2\2\u0134\u013a\3\2\2\2\u0135"+
-		"\u0136\f\4\2\2\u0136\u0137\7\23\2\2\u0137\u0139\5(\25\5\u0138\u0135\3"+
+		"\u0136\f\4\2\2\u0136\u0137\7\24\2\2\u0137\u0139\5(\25\5\u0138\u0135\3"+
 		"\2\2\2\u0139\u013c\3\2\2\2\u013a\u0138\3\2\2\2\u013a\u013b\3\2\2\2\u013b"+
 		")\3\2\2\2\u013c\u013a\3\2\2\2\u013d\u013e\7\f\2\2\u013e\u013f\5\64\33"+
-		"\2\u013f\u0140\7#\2\2\u0140\u0148\5\34\17\2\u0141\u0142\7\23\2\2\u0142"+
+		"\2\u013f\u0140\7#\2\2\u0140\u0148\5\34\17\2\u0141\u0142\7\24\2\2\u0142"+
 		"\u0143\5\64\33\2\u0143\u0144\7#\2\2\u0144\u0145\5\34\17\2\u0145\u0147"+
 		"\3\2\2\2\u0146\u0141\3\2\2\2\u0147\u014a\3\2\2\2\u0148\u0146\3\2\2\2\u0148"+
 		"\u0149\3\2\2\2\u0149+\3\2\2\2\u014a\u0148\3\2\2\2\u014b\u014c\7!\2\2\u014c"+
 		"\u014d\5\64\33\2\u014d\u014e\7\r\2\2\u014e\u0156\5\34\17\2\u014f\u0150"+
-		"\7\23\2\2\u0150\u0151\5\64\33\2\u0151\u0152\7\r\2\2\u0152\u0153\5\34\17"+
+		"\7\24\2\2\u0150\u0151\5\64\33\2\u0151\u0152\7\r\2\2\u0152\u0153\5\34\17"+
 		"\2\u0153\u0155\3\2\2\2\u0154\u014f\3\2\2\2\u0155\u0158\3\2\2\2\u0156\u0154"+
 		"\3\2\2\2\u0156\u0157\3\2\2\2\u0157-\3\2\2\2\u0158\u0156\3\2\2\2\u0159"+
 		"\u015a\7\"\2\2\u015a\u015b\5\62\32\2\u015b/\3\2\2\2\u015c\u015d\7\6\2"+
 		"\2\u015d\u015e\5\34\17\2\u015e\61\3\2\2\2\u015f\u0160\b\32\1\2\u0160\u0161"+
 		"\7\4\2\2\u0161\u0162\5\64\33\2\u0162\u0163\7#\2\2\u0163\u016b\5\34\17"+
-		"\2\u0164\u0165\7\23\2\2\u0165\u0166\5\64\33\2\u0166\u0167\7#\2\2\u0167"+
+		"\2\u0164\u0165\7\24\2\2\u0165\u0166\5\64\33\2\u0166\u0167\7#\2\2\u0167"+
 		"\u0168\5\34\17\2\u0168\u016a\3\2\2\2\u0169\u0164\3\2\2\2\u016a\u016d\3"+
 		"\2\2\2\u016b\u0169\3\2\2\2\u016b\u016c\3\2\2\2\u016c\u016e\3\2\2\2\u016d"+
 		"\u016b\3\2\2\2\u016e\u016f\7\17\2\2\u016f\u0170\5\62\32\7\u0170\u018d"+

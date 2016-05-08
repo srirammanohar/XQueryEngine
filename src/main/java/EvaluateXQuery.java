@@ -11,7 +11,6 @@ import org.w3c.dom.Node;
 public class EvaluateXQuery {
     
 	
-  //public static HashMap<>
 	   
 
 	
@@ -25,7 +24,7 @@ public class EvaluateXQuery {
 
 		HashMap<Object, ArrayList<Node>> hmap=new HashMap<Object,ArrayList<Node>>();    
 
-		String Query= "doc(sample.xml)/student ";
+		String Query= "doc(sample2.xml)/class//firstname";
 		  //  System.out.println("This sucks");
 
 		    ANTLRInputStream input = new ANTLRInputStream(Query);
@@ -67,7 +66,9 @@ public class EvaluateXQuery {
                
 		      // System.out.println(xq.fName.file + "sfntf");
 		       xq.evalxqAbsolutePath(hmap);
-		   // System.out.println(hmap.get(xq).toString());
+		       
+		    System.out.println(hmap.get(xq));
+		    System.out.println(hmap.get(xq).size());
 		
 		
 

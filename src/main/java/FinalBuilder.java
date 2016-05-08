@@ -172,7 +172,7 @@ public class FinalBuilder extends xmlBaseListener {
 		 xqRelativePath xql  = (xqRelativePath)map.get(ctx.relative_path().get(0));
 		 xqRelativePath xqr = (xqRelativePath) map.get(ctx.relative_path().get(1));
 		 String slash = "/";
-		 xqRelativePath xqrp = new xqRelativePath(xql,slash,xql);
+		 xqRelativePath xqrp = new xqRelativePath(xql,slash,xqr);
          System.out.println("Sriram is testing relative path");
          System.out.println(xqr.tagname + "single slash");
          Object ob = xqrp;
@@ -197,7 +197,7 @@ public class FinalBuilder extends xmlBaseListener {
 		
 		String s = ctx.tagName().getText();
 		
-		xqRelativePath xrp = new xqRelativePath("@"+s);
+		xqRelativePath xrp = new xqRelativePath(s);
 		System.out.println("Exiting RP Tag");
 		Object ob = xrp;
 		 map.put(ctx,ob);
@@ -218,7 +218,7 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitRp_simple(xmlParser.Rp_simpleContext ctx) {
 		 xqRelativePath xqr = (xqRelativePath) map.get(ctx.relative_path());
 		
-         System.out.println("Sriram is testing relative path bracket");
+         //System.out.println("Sriram is testing relative path bracket");
          Object ob = xqr;
 		 map.put(ctx,ob);
 		
@@ -241,10 +241,10 @@ public class FinalBuilder extends xmlBaseListener {
 		
 		 xqRelativePath xql  = (xqRelativePath)map.get(ctx.relative_path().get(0));
 		 xqRelativePath xqr = (xqRelativePath) map.get(ctx.relative_path().get(1));
-		 System.out.println(xqr.tagname);
 		 String slash = "//";
 		 xqRelativePath xqrp = new xqRelativePath(xql,slash,xqr);
-         System.out.println("Sriram is testing relative path 222");
+         System.out.println("Sriram is testing relative path");
+         System.out.println(xql.tagname + "single slash");
          Object ob = xqrp;
 		 map.put(ctx,ob);
 		
@@ -326,7 +326,7 @@ public class FinalBuilder extends xmlBaseListener {
 	 */
 	@Override public void exitRp_attribute(xmlParser.Rp_attributeContext ctx) { 
 		
-		xqRelativePath rp=new xqRelativePath(ctx.getText());
+		xqRelativePath rp=new xqRelativePath("@"+ctx.getText());
 		System.out.println("inside attribute");
 		Object ob = rp;
 		 map.put(ctx,ob);

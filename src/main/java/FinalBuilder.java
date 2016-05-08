@@ -198,7 +198,7 @@ public class FinalBuilder extends xmlBaseListener {
 		String s = ctx.tagName().getText();
 		
 		xqRelativePath xrp = new xqRelativePath(s);
-		System.out.println("Exiting RP Tag");
+		//System.out.println("Exiting RP Tag");
 		Object ob = xrp;
 		 map.put(ctx,ob);
 		
@@ -286,8 +286,8 @@ public class FinalBuilder extends xmlBaseListener {
 		 xqRelativePath xql  = (xqRelativePath)map.get(ctx.relative_path().get(0));
 		 xqRelativePath xqr = (xqRelativePath) map.get(ctx.relative_path().get(1));
 		 System.out.println(xqr.tagname);
-		 //String slash = "/";
-		 xqRelativePath xqrp = new xqRelativePath(xql,xqr);
+		 String slash = ",";
+		 xqRelativePath xqrp = new xqRelativePath(xql,slash,xqr);
 		 System.out.println("Sriram is testing relative path comma");
 		 Object ob = xqrp;
 		 map.put(ctx,ob);
@@ -308,7 +308,7 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitRp_text(xmlParser.Rp_textContext ctx) {
 		
 		xqRelativePath rp=new xqRelativePath(ctx.getText());
-		System.out.println("inside text");
+		//System.out.println("inside text");
 		Object ob = rp;
 		 map.put(ctx,ob);
 		
@@ -326,8 +326,8 @@ public class FinalBuilder extends xmlBaseListener {
 	 */
 	@Override public void exitRp_attribute(xmlParser.Rp_attributeContext ctx) { 
 		
-		xqRelativePath rp=new xqRelativePath("@"+ctx.getText());
-		System.out.println("inside attribute");
+		xqRelativePath rp=new xqRelativePath(ctx.getText());
+		//System.out.println("inside attribute "+ ctx.getText().toString());
 		Object ob = rp;
 		 map.put(ctx,ob);
 		
@@ -368,7 +368,7 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitRp_anychild(xmlParser.Rp_anychildContext ctx) { 
 
 		xqRelativePath rp=new xqRelativePath(ctx.getText());
-		System.out.println(ctx.getText()+ "feh");
+		//System.out.println(ctx.getText()+ "feh");
 		Object ob = rp;
 		 map.put(ctx,ob);
 		
@@ -458,8 +458,8 @@ public class FinalBuilder extends xmlBaseListener {
 		 xqFilter xql  = (xqFilter)map.get(ctx.filter().get(0));
 		 xqFilter xqr  = (xqFilter)map.get(ctx.filter().get(1));
 
-		System.out.println(xql + "left");
-		System.out.println(xqr);
+		//System.out.println(xql + "left");
+		//System.out.println(xqr);
 		String str = ctx.getChild(1).getText();
 		System.out.println(str + "in filter and");
        xqFilter xqFil =  new xqFilter(xql,xqr,str);
@@ -489,8 +489,8 @@ public class FinalBuilder extends xmlBaseListener {
 		 map.put(ctx,ob);
 		
 		
-		System.out.println("This is eq filter test " + rpl.tagname);
-		System.out.println("This is eq filter test " + rpr.tagname);
+		//System.out.println("This is eq filter test " + rpl.tagname);
+		//System.out.println("This is eq filter test " + rpr.tagname);
 	}
 	/**
 	 * {@inheritDoc}
@@ -513,8 +513,8 @@ public class FinalBuilder extends xmlBaseListener {
 		 Object ob = xqFil;
 		 map.put(ctx,ob);
 		
-		System.out.println("This is eq filter test " + rpl.tagname);
-		System.out.println("This is eq filter test " + rpr.tagname);
+		//System.out.println("This is eq filter test " + rpl.tagname);
+		//System.out.println("This is eq filter test " + rpr.tagname);
 		
 	}
 	/**

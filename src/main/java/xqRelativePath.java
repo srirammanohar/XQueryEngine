@@ -19,7 +19,7 @@ public class xqRelativePath {
 		tagname = t;
 		slash = null;
 		left = right = null;
-		System.out.println("Inside rp tag" + t);
+		//System.out.println("Inside rp tag constructor" + t);
 
 		filter = null;
 		
@@ -72,51 +72,63 @@ public class xqRelativePath {
 
 	public void evalxqRelativePath(Node node, HashMap<Object, ArrayList<Node>> hmap) {
 		// TODO Auto-generated method stub
-		System.out.println( "relative path");
+		//System.out.println( "relative path evaluation main");
+		//System.out.println("String in this rp is " + this.slash);
+		//System.out.println("tagname in this rp is " + this.tagname);
 		 Object obj =this;
 		 Stack<Node> stack_rp = new Stack<Node>();
 		 ArrayList<Node> children = new ArrayList<Node>();
 		 ArrayList<Node> childrenright = new ArrayList<Node>();
-	    	ArrayList<Node> ale = new ArrayList<Node>();
+	     ArrayList<Node> ale = new ArrayList<Node>();
+	     ArrayList<Node> global_list = new ArrayList<Node>();
+	     ArrayList<Node> gb_list = new ArrayList<Node>();
 
 		
-		ArrayList<Node> global_list = new ArrayList<Node>();
 		if((this.tagname !=null )&& (this.tagname.startsWith("@"))){
-         if(node.getNodeType() ==1 ){
-          Element e = (org.w3c.dom.Element) node;
-			if(e.hasAttribute(tagname)) {
-					    	//ArrayList<Node> ale = new ArrayList<Node>();
-					    	ale.add(node);
-					    	hmap.put(this,ale);
-					    }
+			obj=this;
+			System.out.println("Inside attribute evaluation");  
+	        Element e = (org.w3c.dom.Element) node;
+			if(e.hasAttribute(this.tagname.substring(1, this.tagname.length()))) {
+				System.out.println("Inside attribute tagname evaluation");
+				ale.add(node);
 			}
-		}
-		else if(node.getNodeName().equals(this.tagname))
-		{
-		obj=this;
-		System.out.println("Entering tagname");
-	    	ale.add(node);
-	    	hmap.put(this,ale);
+			 hmap.put(obj,ale);
 		}
 		
+		else if(node.getNodeName().equals(this.tagname))
+		{
+			obj=this;
+			System.out.println("Inside tagname");
+	    	ale.add(node);
+	    	hmap.put(this,ale);
+		}	
+		else if((this.tagname!=null)&& (this.tagname.equals("text()"))){
+			if (node.getNodeType()==Node.TEXT_NODE)
+				ale.add(node);
+			obj=this;
+			hmap.put(obj, ale);
+			System.out.println("Inside text()");
+		}
 	
 		else if((this.tagname!=null) && (this.tagname.equals("*"))) {
-			
+				obj=this;
+				System.out.println("Inside star evaluation");
 				//ArrayList<Node> ale = new ArrayList<Node>();
 		    	ale.add(node);
-		    	hmap.put(this,ale);
+		    	hmap.put(obj,ale);
 			
 		}
 		else if((this.tagname!=null) && (this.tagname.equals(".")))
 		{
-			
+				obj=this;
 				System.out.println("Entering for .");
 				//ArrayList<Node> ale = new ArrayList<Node>();
 		    	ale.add(node);
-		    	hmap.put(this,ale);
+		    	hmap.put(obj,ale);
 		}
 		else if((this.tagname!=null) && (this.tagname.equals(".."))){
 			obj=this;
+			System.out.println("Inside .. evaluation");
 			//	ArrayList<Node> ale = new ArrayList<Node>();
 		    	ale.add(node.getParentNode());
 		    	hmap.put(obj,ale);
@@ -124,7 +136,7 @@ public class xqRelativePath {
 			
 		else if((this.slash!=null)&& (this.slash.equals("/"))){
 			
-			System.out.println("Enter rp slash");
+			System.out.println("Inside rp slash");
 			this.left.evalxqRelativePath(node, hmap);
 			
 			 children = (ArrayList<Node>)hmap.get(this.left);
@@ -138,7 +150,7 @@ public class xqRelativePath {
 				{
 					if(childofchild.item(j).getNodeName().contains("#text")) continue;
 					//System.out.println();
-					System.out.println("latest check" + childofchild.item(j).getNodeName() + " ");
+					//System.out.println("latest check" + childofchild.item(j).getNodeName() + " ");
 							System.out.println( childofchild.item(j).getTextContent() + "Sucks");
 					this.right.evalxqRelativePath(childofchild.item(j), hmap);
 					childrenright = hmap.get(this.right);
@@ -162,8 +174,9 @@ public class xqRelativePath {
 		
 		else if((this.slash!=null) && (this.slash.equals("//"))) {
 			Node curr_node = null;
+			System.out.println("Inside double slash evaluation");
 			//ArrayList<Element> curr_node_children;
-			System.out.println("Inside double slash");
+			//System.out.println("Inside double slash");
 			NodeList c;
 			System.out.println(this.left.tagname + "  TAGNAME");
 			this.left.evalxqRelativePath(node, hmap);
@@ -191,17 +204,39 @@ public class xqRelativePath {
 		
 		}
 		else if(this.filter != null){
+
+			this.left.evalxqRelativePath(node, hmap);
 			
-			this.filter.evalFilter(node,hmap);	
+			children=hmap.get(this.left);
+			
+			for(int i=0; i<children.size();i++){
+				NodeList leftchildren = children.get(i).getChildNodes();
+				for(int j=0;j<leftchildren.getLength();j++)
+				{
+					
+					this.filter.evalFilter(leftchildren.item(j), hmap);
+					if(hmap.containsKey(this.filter)){
+					gb_list = hmap.get(this.filter);
+					if(gb_list.size()>0) {
+						ale.add(children.get(i));
+						break;
+					
+					}}
+					
+				}}
+			 hmap.put(this,ale);
+			
+		
 			
 			}
-		else if((this.tagname!=null) && (this.tagname.equals(","))){
+		else if((this.slash!=null) && (this.slash.equals(","))){
+			System.out.println("Inside comma evaluation");
 			this.left.evalxqRelativePath(node, hmap);
 			ArrayList<Node> left_children= hmap.get(this.left);
-			
+			System.out.println("Size of left rp in comma " + left_children.size() );
 			this.right.evalxqRelativePath(node, hmap);
 			ArrayList<Node> right_children= hmap.get(this.right);
-			
+			System.out.println("Size of right rp in comma " + right_children.size() );
 		//	left_children.
 			ArrayList<Node> result= new ArrayList<Node>();
 			
@@ -212,9 +247,7 @@ public class xqRelativePath {
 		}
 		
 		else if(node.getNodeType()==3) {
-			
 			if(node.getTextContent().equals(tagname)){
-				
 				
 				//	ArrayList<Node> ale = new ArrayList<Node>();
 			    	ale.add(node);

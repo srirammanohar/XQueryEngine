@@ -24,48 +24,29 @@ public class EvaluateXQuery {
 
 		HashMap<Object, ArrayList<Node>> hmap=new HashMap<Object,ArrayList<Node>>();    
 
-		String Query= "doc(sample2.xml)/class//firstname";
+		String Query= "doc(sample2.xml)/class[student]";
 		  //  System.out.println("This sucks");
 
 		    ANTLRInputStream input = new ANTLRInputStream(Query);
-		    //System.out.println("This sucks");
-
 		    xmlLexer lexer = new xmlLexer(input);
-		    //System.out.println("This sucks");
 
 		    CommonTokenStream tokens = new CommonTokenStream(lexer);
 
 		    lexer.reset();
-		    //System.out.println("This sucks");
-
-		    xmlParser parser = new xmlParser(tokens);
-		    //System.out.println("This sucks");
-
-
-		        ParseTree tree = parser.absolute_path(); 
-
-			   System.out.println(tree.toStringTree(parser));
-		        
-
-
-		        String query = tree.getText();
-
-		        String filename = tree.getChild(2).getText();
-		       
-		         
-		           
-		        //Absolute_pathContext absolute_pathContext=parser.absolute_path();
-		        System.out.println(tree.toStringTree(parser)); 
-		        ParseTreeWalker walker=new ParseTreeWalker();
-		        xmlBaseListener listener=new xmlBaseListener();
-		        FinalBuilder xmlwalk= new FinalBuilder();
-		        walker.walk(xmlwalk, tree);
-                 Object ob = xmlwalk.getObject();
-                 xqAbsolutePath xq =(xqAbsolutePath)ob;
-                System.out.println(ob.getClass().getName());
-               
-		      // System.out.println(xq.fName.file + "sfntf");
-		       xq.evalxqAbsolutePath(hmap);
+		    xmlParser parser = new xmlParser(tokens);	    
+			     	ParseTree tree = parser.absolute_path(); 
+			        String query = tree.getText();
+			        String filename = tree.getChild(2).getText();
+			 
+			        System.out.println(tree.toStringTree(parser)); 
+			        ParseTreeWalker walker=new ParseTreeWalker();
+			        xmlBaseListener listener=new xmlBaseListener();
+			        FinalBuilder xmlwalk= new FinalBuilder();
+			        walker.walk(xmlwalk, tree);
+	                Object ob = xmlwalk.getObject();
+	                xqAbsolutePath xq =(xqAbsolutePath)ob;
+	                System.out.println(ob.getClass().getName());
+	                xq.evalxqAbsolutePath(hmap);
 		       
 		    System.out.println(hmap.get(xq));
 		    System.out.println(hmap.get(xq).size());

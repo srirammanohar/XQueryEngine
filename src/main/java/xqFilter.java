@@ -1,3 +1,6 @@
+import java.util.HashMap;
+
+import org.w3c.dom.Node;
 
 public class xqFilter {
 	
@@ -60,6 +63,15 @@ public class xqFilter {
 		left_filter = leftfilter;
 		right_filter = null;
 		expr = expression;
+		
+		
+	}
+
+	public void evalFilter(Node item, HashMap hmap) {
+		// TODO Auto-generated method stub
+		
+		
+		
 		
 		
 	}

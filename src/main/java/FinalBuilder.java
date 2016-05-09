@@ -1,9 +1,14 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
+
+
 
 public class FinalBuilder extends xmlBaseListener {
 	ParseTreeProperty<Object> map = new ParseTreeProperty<Object>();
@@ -689,7 +694,17 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXInd(xmlParser.XIndContext ctx) { }
+	@Override public void exitXInd(xmlParser.XIndContext ctx) { 
+		xqQuery left = (xqQuery)map.get(ctx.xquery().get(0));
+		xqQuery right = (xqQuery)map.get(ctx.xquery().get(1));
+		xqQuery xqq = new xqQuery(left,right);
+		Object object = xqq;
+		map.put(ctx,object);
+		
+		
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -701,7 +716,15 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitX_ap(xmlParser.X_apContext ctx) { }
+	@Override public void exitX_ap(xmlParser.X_apContext ctx) {
+		
+		xqAbsolutePath xqap  = (xqAbsolutePath)map.get(ctx.absolute_path());
+		xqQuery xqr = new xqQuery(xqap);
+		Object object = xqr;
+		map.put(ctx,object);
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -725,7 +748,17 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXLet(xmlParser.XLetContext ctx) { }
+	@Override public void exitXLet(xmlParser.XLetContext ctx) {
+		
+		xqLetClause let = (xqLetClause) map.get(ctx.letClause());
+		xqQuery xq = (xqQuery)map.get(ctx.xquery());
+		xqQuery xqr = new xqQuery(let,xq);
+		Object ob = xqr;
+		map.put(ctx, xqr);
+		
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -737,7 +770,12 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitX_var(xmlParser.X_varContext ctx) { }
+	@Override public void exitX_var(xmlParser.X_varContext ctx) {
+		String str = ctx.getText().toString();
+		xqQuery xqr = new xqQuery("$",str);
+		Object object = xqr;
+		map.put(ctx,object);	
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -749,13 +787,48 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitX_desc(xmlParser.X_descContext ctx) { }
+	@Override public void exitX_desc(xmlParser.X_descContext ctx) { 
+		
+		
+		xqQuery xqap  = (xqQuery)map.get(ctx.xquery());
+		xqRelativePath xrp = (xqRelativePath)map.get(ctx.relative_path());
+		String operand = "//" ;
+		xqQuery xq = new xqQuery(xqap,operand,xrp);
+		Object object = xq;
+		map.put(ctx,object);	
+		
+		
+		
+		
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterX_state(xmlParser.X_stateContext ctx) { }
+	@Override public void enterX_state(xmlParser.X_stateContext ctx) { 
+		xqQuery xq;
+		xqForClause xqfc = (xqForClause) map.get(ctx.forClause());
+		xqWhereClause xqwc = (xqWhereClause)map.get(ctx.whereClause());
+		xqReturnClause xqrc = (xqReturnClause)map.get(ctx.returnClause());
+		xqLetClause xqlc = (xqLetClause)map.get(ctx.letClause());
+		if((xqlc == null) && (xqwc == null))
+			 xq = new xqQuery(xqfc,xqrc);
+		else if(xqlc == null)
+			xq = new xqQuery(xqfc,xqwc,xqrc);
+		else if(xqwc == null)
+			xq = new xqQuery(xqfc, xqlc,xqrc);
+		else 
+			xq = new xqQuery(xqfc, xqwc, xqlc,xqrc);
+		
+		Object obj = xq;
+		map.put(ctx,obj);
+		
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -773,7 +846,20 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitX_slash(xmlParser.X_slashContext ctx) { }
+	@Override public void exitX_slash(xmlParser.X_slashContext ctx) {
+		
+		xqQuery xqap  = (xqQuery)map.get(ctx.xquery());
+		xqRelativePath xrp = (xqRelativePath)map.get(ctx.relative_path());
+		String operand = "/" ;
+		xqQuery xq = new xqQuery(xqap,operand,xrp);
+		Object object = xq;
+		map.put(ctx,object);	
+		
+		
+		
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -785,19 +871,39 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitX_node(xmlParser.X_nodeContext ctx) { }
+	@Override public void exitX_node(xmlParser.X_nodeContext ctx) {
+		String left = ctx.lt.toString();
+		String right = ctx.rt.toString();
+		xqQuery xqap  = (xqQuery)map.get(ctx.xquery());
+		xqQuery xq = new xqQuery("<>{}</>", left,right, xqap);
+		Object object = xq;
+		map.put(ctx,object);	
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterX_simple(xmlParser.X_simpleContext ctx) { }
+	@Override public void enterX_simple(xmlParser.X_simpleContext ctx) {
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitX_simple(xmlParser.X_simpleContext ctx) { }
+	@Override public void exitX_simple(xmlParser.X_simpleContext ctx) {
+		
+		xqQuery xqap  = (xqQuery)map.get(ctx.xquery());
+		xqQuery xqr = new xqQuery("()", xqap);
+		Object object = xqr;
+		map.put(ctx,object);	
+		
+		
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -809,7 +915,16 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitX_str(xmlParser.X_strContext ctx) { }
+	@Override public void exitX_str(xmlParser.X_strContext ctx) { 
+		
+		String str = ctx.getText().toString();
+		xqQuery xqr = new xqQuery(str);
+		Object object = xqr;
+		map.put(ctx,object);
+		
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -845,7 +960,9 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFor_j(xmlParser.For_jContext ctx) { }
+	@Override public void exitFor_j(xmlParser.For_jContext ctx) {
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -929,7 +1046,27 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitForClause(xmlParser.ForClauseContext ctx) { }
+	@Override public void exitForClause(xmlParser.ForClauseContext ctx) { 
+		
+		 List<xqQuery> lxq = new ArrayList<xqQuery>();
+		 xqQuery temp;
+		 List<String> variable_list = new ArrayList<String>();
+		 for(int i=0; i<ctx.var().size() ; i++) {
+			 
+			 variable_list.add(ctx.var(i).toString());
+			 
+		 }
+		 for(int i=0 ; i<ctx.xquery().size();i++){
+			 temp = (xqQuery) map.get(ctx.xquery(i));
+			 lxq.add(temp);
+		 }
+	
+		 
+		 xqForClause con = new xqForClause(lxq,variable_list);
+		 Object value = con;
+		  map.put(ctx, value);	
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -941,7 +1078,29 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLetClause(xmlParser.LetClauseContext ctx) { }
+	@Override public void exitLetClause(xmlParser.LetClauseContext ctx) {
+		
+		 List<xqQuery> lxq = new ArrayList<xqQuery>();
+		 xqQuery temp;
+		 List<String> variable_list = new ArrayList<String>();
+		 for(int i=0; i<ctx.var().size() ; i++) {
+			 
+			 variable_list.add(ctx.var(i).toString());
+			 
+		 }
+		 for(int i=0 ; i<ctx.xquery().size();i++){
+			 temp = (xqQuery) map.get(ctx.xquery(i));
+			 lxq.add(temp);
+		 }
+	
+		 
+		 xqLetClause con = new xqLetClause(lxq,variable_list);
+		 Object value = con;
+		  map.put(ctx, value);	
+		
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -953,7 +1112,16 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWhereClause(xmlParser.WhereClauseContext ctx) { }
+	@Override public void exitWhereClause(xmlParser.WhereClauseContext ctx) {
+		
+		Condition c = (Condition) map.get(ctx.cond());
+		String s ="where";
+		xqWhereClause xq = new xqWhereClause(c,s);
+		Object ob = xq;
+		map.put(ctx, ob);
+
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -965,7 +1133,14 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitReturnClause(xmlParser.ReturnClauseContext ctx) { }
+	@Override public void exitReturnClause(xmlParser.ReturnClauseContext ctx) { 
+		
+		xqQuery c = (xqQuery) map.get(ctx.xquery());
+		String s ="where";
+		xqReturnClause xq = new xqReturnClause(c,s);
+		Object ob = xq;
+		map.put(ctx, ob);
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -977,7 +1152,15 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondEq(xmlParser.CondEqContext ctx) { }
+	@Override public void exitCondEq(xmlParser.CondEqContext ctx) {
+		xqQuery xql = (xqQuery) map.get(ctx.xquery(0));
+		xqQuery xqr = (xqQuery) map.get(ctx.xquery(1));
+		String oper = "= eq";
+		Condition c= new Condition(xql,xqr,oper);
+		Object obj=c;
+		map.put(ctx, obj);	
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -989,7 +1172,15 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondIs(xmlParser.CondIsContext ctx) { }
+	@Override public void exitCondIs(xmlParser.CondIsContext ctx) { 
+		xqQuery xql = (xqQuery) map.get(ctx.xquery(0));
+		xqQuery xqr = (xqQuery) map.get(ctx.xquery(1));
+		String oper = "is==";
+		Condition c= new Condition(xql,xqr,oper);
+		Object obj=c;
+		map.put(ctx, obj);
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1001,7 +1192,29 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondSome(xmlParser.CondSomeContext ctx) { }
+	@Override public void exitCondSome(xmlParser.CondSomeContext ctx) {
+		
+		
+		Condition c = (Condition) map.get(ctx.cond());
+		 List<xqQuery> lxq = new ArrayList<xqQuery>();
+		 xqQuery temp;
+		 List<String> variable_list = new ArrayList<String>();
+		 for(int i=0; i<ctx.var().size() ; i++) {
+			 
+			 variable_list.add(ctx.var(i).toString());
+			 
+		 }
+		 for(int i=0 ; i<ctx.xquery().size();i++){
+			 temp = (xqQuery) map.get(ctx.xquery(i));
+			 lxq.add(temp);
+		 }
+		 String st ="some";
+		 
+		 Condition con = new Condition(lxq,variable_list,c,st);
+		 Object value = con;
+		  map.put(ctx, value);
+		 
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1013,7 +1226,14 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondEmp(xmlParser.CondEmpContext ctx) { }
+	@Override public void exitCondEmp(xmlParser.CondEmpContext ctx) { 
+		xqQuery xql = (xqQuery) map.get(ctx.xquery());
+		String oper="()";
+		Condition c=new Condition(xql,oper);
+		Object ob=this;
+		map.put(ctx, ob);
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1025,7 +1245,15 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondAnd(xmlParser.CondAndContext ctx) { }
+	@Override public void exitCondAnd(xmlParser.CondAndContext ctx) { 
+		
+		Condition c1=(Condition) map.get(ctx.cond(0));
+		Condition c2=(Condition) map.get(ctx.cond(1));
+		String str="and";
+		Condition c3=new Condition(c1,c2,str);
+		Object ob=this;
+		map.put(ctx,ob);
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1037,7 +1265,14 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondOr(xmlParser.CondOrContext ctx) { }
+	@Override public void exitCondOr(xmlParser.CondOrContext ctx) {
+		Condition c1=(Condition) map.get(ctx.cond(0));
+		Condition c2=(Condition) map.get(ctx.cond(1));
+		String str="or";
+		Condition c3=new Condition(c1,c2,str);
+		Object ob=this;
+		map.put(ctx,ob);
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1049,7 +1284,13 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondPlain(xmlParser.CondPlainContext ctx) { }
+	@Override public void exitCondPlain(xmlParser.CondPlainContext ctx) {
+		Condition c1=(Condition) map.get(ctx.cond());
+		String str="()";
+		Condition c2=new Condition(c1,str);
+		Object ob=this;
+		map.put(ctx,ob);
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1061,7 +1302,14 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondNot(xmlParser.CondNotContext ctx) { }
+	@Override public void exitCondNot(xmlParser.CondNotContext ctx) { 
+		Condition c1=(Condition) map.get(ctx.cond());
+		String str="not";
+		Condition c2=new Condition(c1,str);
+		Object ob=this;
+		map.put(ctx,ob);
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *

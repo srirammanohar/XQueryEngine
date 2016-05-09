@@ -66,7 +66,13 @@ public class xqRelativePath {
 	}
 	
 	
-	
+	public boolean ignore_textnode(Node node)
+	{
+		return (node.getNodeType()==Node.TEXT_NODE && 
+				(node.getNodeValue().toString().contains("\n") ||
+				node.getNodeValue().toString().contains("\t")||
+				node.getNodeValue().toString().contains("\r")));
+	}
 	
 	
 
@@ -87,8 +93,10 @@ public class xqRelativePath {
 		if((this.tagname !=null )&& (this.tagname.startsWith("@"))){
 			obj=this;
 			System.out.println("Inside attribute evaluation");  
-	        Element e = (org.w3c.dom.Element) node;
-			if(e.hasAttribute(this.tagname.substring(1, this.tagname.length()))) {
+	       // Element e = (org.w3c.dom.Element) node;
+			if(node.hasAttributes() )
+	        if(node.getAttributes().getNamedItem(this.tagname.substring(1, this.tagname.length()))!=null){
+			//if(e.hasAttribute(this.tagname.substring(1, this.tagname.length()))) {
 				System.out.println("Inside attribute tagname evaluation");
 				ale.add(node);
 			}
@@ -148,7 +156,8 @@ public class xqRelativePath {
 				//System.out.println(childofchild.getLength() + "sss");
 				for(int j=0; j<childofchild.getLength(); j++)
 				{
-					if(childofchild.item(j).getNodeName().contains("#text")) continue;
+					//if(childofchild.item(j).getNodeName().contains("#text")) continue;
+					if(!ignore_textnode(childofchild.item(j)))
 					//System.out.println();
 					//System.out.println("latest check" + childofchild.item(j).getNodeName() + " ");
 							System.out.println( childofchild.item(j).getTextContent() + "Sucks");
@@ -195,7 +204,9 @@ public class xqRelativePath {
 						global_list.add(childrenright.get(j));
 					}
 				 for(int i =0; i< c.getLength();i++) {
-					 if(!c.item(i).getNodeName().contains("#text"))
+					 //if(!c.item(i).getNodeName().contains("#text"))
+					if(!ignore_textnode(c.item(i)))
+					 
 					 stack_rp.push(c.item(i));	 		 
 				 }
 			}

@@ -27,6 +27,15 @@ public class xqAbsolutePath {
 		
 	}
 	
+	public boolean ignore_textnode(Node node)
+	{
+		return (node.getNodeType()==Node.TEXT_NODE && 
+				(node.getNodeValue().toString().contains("\n") ||
+				node.getNodeValue().toString().contains("\t")||
+				node.getNodeValue().toString().contains("\r")));
+		
+		
+	}
 	public void evalxqAbsolutePath(HashMap<Object, ArrayList<Node>> hmap){
 		
 		ArrayList<Node> nodes = new ArrayList<Node>();
@@ -52,7 +61,8 @@ public class xqAbsolutePath {
         	for(int i =0 ; i<childnodes.getLength();i++){
         		
         		//System.out.println(childnodes.toString());
-        		if(childnodes.item(i).getNodeName().toString()!= "#text" )
+        		//if(childnodes.item(i).getNodeName().toString()!= "#text" )
+        		if(!ignore_textnode(childnodes.item(i)))
         			child.add(childnodes.item(i));
         	//	System.out.println("check3" + childnodes.item(i).getNodeName().toString());
         		
@@ -61,7 +71,8 @@ public class xqAbsolutePath {
         	
 		
         	for (int i =0 ; i<child.size();i++){
-        		if (child.get(i).getNodeName().toString() != "#text")
+        		//if (child.get(i).getNodeName().toString() != "#text")
+        		if(!ignore_textnode(child.get(i)))
         		{
         			//System.out.println(child.get(i).getNodeName().toString() + "childnode");
         			rel_path.evalxqRelativePath(child.get(i) , hmap);
@@ -100,7 +111,8 @@ public class xqAbsolutePath {
             	}
         		
         		for(int i=0; i< l.size();i++){
-        			if (l.get(i).getNodeName() != "#text")
+        			//if (l.get(i).getNodeName() != "#text")
+        			if(!ignore_textnode(l.get(i)))
             		{
             			//System.out.println( "calling childnode");
 

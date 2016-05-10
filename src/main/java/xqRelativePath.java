@@ -111,11 +111,13 @@ public class xqRelativePath {
 	    	hmap.put(this,ale);
 		}	
 		else if((this.tagname!=null)&& (this.tagname.equals("text()"))){
-			if (node.getNodeType()==Node.TEXT_NODE)
-				ale.add(node);
+			if (node.getNodeType()==Node.TEXT_NODE && (!ignore_textnode(node))){
+				System.out.println("Inside text()");
+				ale.add(node);}
 			obj=this;
 			hmap.put(obj, ale);
-			System.out.println("Inside text()");
+			
+			
 		}
 	
 		else if((this.tagname!=null) && (this.tagname.equals("*"))) {
@@ -148,19 +150,14 @@ public class xqRelativePath {
 			this.left.evalxqRelativePath(node, hmap);
 			
 			 children = (ArrayList<Node>)hmap.get(this.left);
-		//	System.out.println(children.size() + "SIZE OF");
+			System.out.println(children.size() + "SIZE OF");
 			for(int i=0 ; i<children.size(); i++)
 			{
-			//	System.out.println("Iteration"+ i);
-				NodeList childofchild = children.get(i).getChildNodes();
-				//System.out.println(childofchild.getLength() + "sss");
+				NodeList childofchild = children.get(i).getChildNodes();	
 				for(int j=0; j<childofchild.getLength(); j++)
 				{
 					//if(childofchild.item(j).getNodeName().contains("#text")) continue;
-					if(!ignore_textnode(childofchild.item(j)))
-					//System.out.println();
-					//System.out.println("latest check" + childofchild.item(j).getNodeName() + " ");
-							System.out.println( childofchild.item(j).getTextContent() + "Sucks");
+				   if(ignore_textnode(childofchild.item(j))) continue;
 					this.right.evalxqRelativePath(childofchild.item(j), hmap);
 					childrenright = hmap.get(this.right);
 					
@@ -204,7 +201,7 @@ public class xqRelativePath {
 						global_list.add(childrenright.get(j));
 					}
 				 for(int i =0; i< c.getLength();i++) {
-					 //if(!c.item(i).getNodeName().contains("#text"))
+					// if(!c.item(i).getNodeName().contains("#text"))
 					if(!ignore_textnode(c.item(i)))
 					 
 					 stack_rp.push(c.item(i));	 		 
@@ -244,11 +241,8 @@ public class xqRelativePath {
 			System.out.println("Inside comma evaluation");
 			this.left.evalxqRelativePath(node, hmap);
 			ArrayList<Node> left_children= hmap.get(this.left);
-			System.out.println("Size of left rp in comma " + left_children.size() );
 			this.right.evalxqRelativePath(node, hmap);
 			ArrayList<Node> right_children= hmap.get(this.right);
-			System.out.println("Size of right rp in comma " + right_children.size() );
-		//	left_children.
 			ArrayList<Node> result= new ArrayList<Node>();
 			
 			result.addAll(left_children);
@@ -256,19 +250,7 @@ public class xqRelativePath {
 			hmap.put(this, result);	
 			
 		}
-		
-		else if(node.getNodeType()==3) {
-			if(node.getTextContent().equals(tagname)){
 				
-				//	ArrayList<Node> ale = new ArrayList<Node>();
-			    	ale.add(node);
-			    	hmap.put(this,ale);
-				
-				System.out.println("fgbhnjdmxkw,");
-				
-			}			
-			
-		}
 		
 		
 		else{

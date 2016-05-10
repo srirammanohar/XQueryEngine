@@ -16,15 +16,14 @@ public class EvaluateXQuery {
 	
 	
 	public EvaluateXQuery() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		HashMap<Object, ArrayList<Node>> hmap=new HashMap<Object,ArrayList<Node>>();    
 
-		String Query= "doc(sample2.xml)//@rollno";
+		String Query= "doc(sample2.xml)/class//.";
 		  //  System.out.println("This sucks");
 
 		    ANTLRInputStream input = new ANTLRInputStream(Query);

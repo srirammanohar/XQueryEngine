@@ -33,8 +33,6 @@ public class xqAbsolutePath {
 				(node.getNodeValue().toString().contains("\n") ||
 				node.getNodeValue().toString().contains("\t")||
 				node.getNodeValue().toString().contains("\r")));
-		
-		
 	}
 	public void evalxqAbsolutePath(HashMap<Object, ArrayList<Node>> hmap){
 		
@@ -55,47 +53,28 @@ public class xqAbsolutePath {
         ArrayList<Node> root=new ArrayList<Node>();
         root.add(newdoc.getDocumentElement());
         if(sl.equals("/")){
-        	//System.out.println("Inside Slash");
         	childnodes = root.get(0).getChildNodes();
-        	//System.out.println(childnodes.toString());
         	for(int i =0 ; i<childnodes.getLength();i++){
-        		
-        		//System.out.println(childnodes.toString());
-        		//if(childnodes.item(i).getNodeName().toString()!= "#text" )
         		if(!ignore_textnode(childnodes.item(i)))
-        			child.add(childnodes.item(i));
-        	//	System.out.println("check3" + childnodes.item(i).getNodeName().toString());
-        		
+        			child.add(childnodes.item(i));        		
         	}
-        
-        	
-		
+        		
         	for (int i =0 ; i<child.size();i++){
         		//if (child.get(i).getNodeName().toString() != "#text")
         		if(!ignore_textnode(child.get(i)))
         		{
-        			//System.out.println(child.get(i).getNodeName().toString() + "childnode");
         			rel_path.evalxqRelativePath(child.get(i) , hmap);
         			   if(hmap.containsKey(rel_path))
         					returnnode = hmap.get(rel_path);
         			   for(int k=0 ; k<returnnode.size();k++) {
+        				   if(!ignore_textnode(returnnode.get(k)))
         				   curr_list.add(returnnode.get(k));
-        			
-        				   
-        			   }
-        			   /* 
-        			    if(hmap.containsKey(this)) {
-        			    	curr_list = hmap.get(this);
-        			    	curr_list.addAll(returnnode);
-        			    	hmap.put(this, curr_list);
-        			    }*/
-        			        
-        			 							
+        			        				   
+        			   }    					
         		}
         	}
         }
         else{
-        	//System.out.println("The Size of root is"+ root.get(0));
         	s.push(root.get(0));
         	rel_path.evalxqRelativePath(root.get(0),hmap);
         	
@@ -104,34 +83,24 @@ public class xqAbsolutePath {
         		NodeList lj = cur.getChildNodes();
         		
         		ArrayList<Node> l=new ArrayList<Node>();
-        		for(int i =0 ; i<lj.getLength();i++){
-            		
-            		l.add(lj.item(i));
-            		
-            	}
-        		
+        		for(int i =0 ; i<lj.getLength();i++){           		
+            		l.add(lj.item(i));            		
+            	}       		
         		for(int i=0; i< l.size();i++){
         			//if (l.get(i).getNodeName() != "#text")
         			if(!ignore_textnode(l.get(i)))
             		{
-            			//System.out.println( "calling childnode");
-
         			rel_path.evalxqRelativePath(l.get(i),hmap);
         			s.push(l.get(i));
         			if(hmap.containsKey(rel_path))
     					returnnode = hmap.get(rel_path);
-    			   for(int k=0 ; k<returnnode.size();k++) {
-    				   curr_list.add(returnnode.get(k));
-        			
-            		}
-        			
-        	}
-        		
-			
+        			for(int k=0 ; k<returnnode.size();k++) {
+        			if(!ignore_textnode(returnnode.get(k)))
+    				   curr_list.add(returnnode.get(k));       			
+            		}      			
+            		}			
 				   
-			   }
-        		
-        		
+			   }       		
         		
         	}
  	

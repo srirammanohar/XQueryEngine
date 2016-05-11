@@ -6,9 +6,9 @@
 
   <student rollno="393">
 
-      <firstname>dinkar</firstname>
+       <firstname>dinkar</firstname>
 
-      <lastname>kad</lastname>
+     	<firstname>dinkar</firstname>
 
       <nickname>dinkar</nickname>
 
@@ -68,6 +68,9 @@
 
       <marks>85</marks>
 
+  </student>
+  <student>
+  	<firstname>Swetha</firstname>
   </student>
 
   <student rollno="53">

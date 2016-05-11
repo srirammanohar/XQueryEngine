@@ -54,7 +54,7 @@ public class xqFilter {
 		right = null;
 		left_filter = leftfilter;
 		right_filter = null;
-		expr = null;
+		expr = "";
 		
 		
 	}
@@ -103,7 +103,7 @@ public class xqFilter {
 		
 	}
 
-	public void evalFilter(Node node,HashMap<Object, ArrayList<Node>> hmap) {
+	public boolean evalFilter(Node node,HashMap<Object, ArrayList<Node>> hmap) {
 		// TODO Auto-generated method stub
 		ArrayList<Node> return_list = new ArrayList<Node>();
 		ArrayList<Node> global_list = new ArrayList<Node>();
@@ -113,47 +113,136 @@ public class xqFilter {
 		
 		
 		Object obj;
-
 		
+		if(this.expr.equals("") && (this.left!=null) && (this.right==null)&& (this.left_filter == null) && (this.right_filter == null)) {
+			
+			NodeList x = node.getChildNodes();
+			for(int i=0; i< x.getLength();i++){
+				this.left.evalxqRelativePath(x.item(i), hmap);
+				 return_list = hmap.get(this.left);
+				 if(return_list.size() >0) { 
+					 return true;
+					 
+				   
+				 }}
+			return false;
+				 
+			}
+		else if ((this.expr.equals("=") || this.expr.equals("eq") ) && (this.left!=null) && (this.right!=null)){	
+		
+		NodeList x = node.getChildNodes();
+		int iter;
+		for(int i=0; i< x.getLength();i++){
+		
+				this.left.evalxqRelativePath(x.item(i), hmap);
+				 filter_list_left.addAll(hmap.get(this.left)) ;
+				 this.right.evalxqRelativePath(x.item(i), hmap);
+				 filter_list_right.addAll(hmap.get(this.right));
+				 }
+
+        if(filter_list_left.size() != filter_list_right.size()) return false;
+         iter = filter_list_left.size();
+			    for(int j=0; j< iter  ; j++){
+			    	 
+			    	 System.out.println("INSIDE THE LOOP");
+			    	 if(!filter_list_left.get(j).isEqualNode(filter_list_right.get(j)) && filter_list_right.get(j)!=null){
+			    		//if(!filter_list_left.get(j).getTextContent().toString().equals(filter_list_right.get(j).getTextContent().toString())){ 
+			    		 return false;   	
+			    	 }
+			     }
+			    return true;						
+		}
+		else if ((this.expr.equals("==") || this.expr.equals("is") ) && (this.left!=null) && (this.right!=null)){	
+			
+			NodeList x = node.getChildNodes();
+			int iter;
+			for(int i=0; i< x.getLength();i++){
+			
+					this.left.evalxqRelativePath(x.item(i), hmap);
+					 filter_list_left.addAll(hmap.get(this.left)) ;
+					 this.right.evalxqRelativePath(x.item(i), hmap);
+					 filter_list_right.addAll(hmap.get(this.right));
+					 }
+
+	        if(filter_list_left.size() != filter_list_right.size()) return false;
+	         iter = filter_list_left.size();
+				    for(int j=0; j< iter  ; j++){
+				    	 
+				    	 System.out.println("INSIDE THE LOOP");
+				    	 if(!filter_list_left.get(j).isSameNode(filter_list_right.get(j)) && filter_list_right.get(j)!=null){
+				    		//if(!filter_list_left.get(j).getTextContent().toString().equals(filter_list_right.get(j).getTextContent().toString())){ 
+				    		 return false;   	
+				    	 }
+				     }
+				    return true;						
+			}
+			
+		
+		else if(this.expr.equals("and")  && (this.left_filter!=null) && (this.right_filter!=null))
+		{
+		   boolean flag_left = this.left_filter.evalFilter(node, hmap);
+		   boolean flag_right = this.right_filter.evalFilter(node, hmap);
+		  return flag_left && flag_right;
+			
+		}
+		else if(this.expr.equals("or")  && (this.left_filter!=null) && (this.right_filter!=null))
+		{
+		   boolean flag_left = this.left_filter.evalFilter(node, hmap);
+		   boolean flag_right = this.right_filter.evalFilter(node, hmap);
+		  return flag_left || flag_right;
+			
+		}
+		else if(this.expr.equals("not")  && (this.left_filter!=null) )
+		{
+		    return !this.left_filter.evalFilter(node, hmap);
+		  
+			
+		}
+
+
+		/*
 		if(this.expr.equals("") && (this.left!=null) && (this.right==null)&& (this.left_filter == null) && (this.right_filter == null)) {
 			
 			this.left.evalxqRelativePath(node, hmap);		
 			return_list = hmap.get(this.left);
-			
+			System.out.println(this.left.tagname + "Inside eval filter");
 			Object var = this;
-			if(return_list!= null)
-			hmap.put(var, return_list);
-			
-			
-			
-		
+			if(return_list.size()!=0){
+				System.out.println("Return list is null" + return_list.size() );
+				return true;
+			}
+			else 
+			{
+				System.out.println("Return list is not null" + node.getNodeValue());
+				return false;
+			}
 		}	
 		
-		else if (this.expr.equals("=") || (this.expr.equals("eq"))){
-			System.out.println("Inside filter equal evaluation");
-			 this.left.evalxqRelativePath(node, hmap);
-			 filter_list_left = hmap.get(this.left);
-			 this.right.evalxqRelativePath(node, hmap);
-			 filter_list_right = hmap.get(this.right);
-			 for (int i=0; i<filter_list_left.size(); i++){
-				 
-				 for(int j=0;j<filter_list_right.size();j++){
+		else if ((this.expr.equals("=") || this.expr.equals("eq") ) && (this.left!=null) && (this.right!=null)){
+			     System.out.println("Inside eq");
+				 this.left.evalxqRelativePath(node, hmap);
+				 filter_list_left = hmap.get(this.left);
+				 System.out.println("Left list size" + filter_list_left.size());
+				 this.right.evalxqRelativePath(node, hmap);
+				 filter_list_right = hmap.get(this.right);
+				 System.out.println("Right size" + filter_list_right.size());
+				 if(filter_list_left.size() != filter_list_right.size()) return false;
+				 for(int i =0; i< filter_list_left.size();i++)
+				 {
 					 
-					 
+					 if(!filter_list_left.get(i).isEqualNode(filter_list_right.get(i))) return false;
 					 
 				 }
+				 return true;
 				 
 				 
-				 
-				 
-				 
-			 }
-			
-			
+			 }*/
+		
+		return true;
 		}
 		
 		
 	}
 	
 
-}
+

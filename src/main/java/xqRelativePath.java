@@ -211,32 +211,57 @@ public class xqRelativePath {
 			hmap.put(this, global_list);
 		
 		}
-		else if(this.filter != null){
+	/*	else if(this.filter != null && false){
 
 			this.left.evalxqRelativePath(node, hmap);
 			
 			children=hmap.get(this.left);
+			ale.clear();
 			
 			for(int i=0; i<children.size();i++){
+				boolean flag = true;
 				NodeList leftchildren = children.get(i).getChildNodes();
 				for(int j=0;j<leftchildren.getLength();j++)
 				{
 					
-					this.filter.evalFilter(leftchildren.item(j), hmap);
-					if(hmap.containsKey(this.filter)){
-					gb_list = hmap.get(this.filter);
-					if(gb_list.size()>0) {
-						ale.add(children.get(i));
-						break;
+				    flag =  this.filter.evalFilter(leftchildren.item(j), hmap);
+					//if(hmap.containsKey(this.filter)){
+					//gb_list = hmap.get(this.filter);
+					// if(flag) {
+				    //ale.add(children.get(i));
+					//	break;
 					
-					}}
-					
-				}}
+					}
+					//}
+					  
+					 
+					if(flag) break;
+				    
+				}
+				
+			if(flag == true) ale.add(children.get(i));
+			}
 			 hmap.put(this,ale);
 			
 		
 			
 			}
+		*/
+		else if(this.filter != null) {
+			boolean flag;
+			this.left.evalxqRelativePath(node, hmap);
+			children = hmap.get(this.left);
+			for(int i=0 ; i< children.size(); i++){
+				flag = this.filter.evalFilter(children.get(i), hmap);
+				if(flag) {
+					ale.add(children.get(i));
+				}
+				
+		
+			}
+			hmap.put(this,ale);		
+		}
+		
 		else if((this.slash!=null) && (this.slash.equals(","))){
 			System.out.println("Inside comma evaluation");
 			this.left.evalxqRelativePath(node, hmap);

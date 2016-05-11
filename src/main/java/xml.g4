@@ -5,7 +5,7 @@ grammar xml;
 
 
 query :
-absolute_path|xquery|oxquery EOF
+		xquery
 ;
 
 absolute_path 	: document openBracket fileName closeBracket '/' relative_path 		#apchild
@@ -116,9 +116,12 @@ cond : left=xquery '=' right=xquery              #condEq
      | 'not' cond                        #condNot
      ;
 
-Id : [^_A-Za-z][_A-Za-z0-9-.]* ;
 
-var : '$' Id;
+
+var : '$'Id;
+
+Id 	: 	AlphaNumeric    //[^_A-Za-z][_A-Za-z0-9-.]* 
+	;
 
 String_constant : [^"][_A-Za-z0-9-.!, ]*["$] ;
 

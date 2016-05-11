@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public class FinalBuilder extends xmlBaseListener {
 	ParseTreeProperty<Object> map = new ParseTreeProperty<Object>();
 	Object obj;
+	xqQuery xqobj;
    // public static HashMap<ctx,Object> global_map = new HashMap<ctx,Object>();
 	public FinalBuilder() {
 		// TODO Auto-generated constructor stub
@@ -31,7 +32,13 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQuery(xmlParser.QueryContext ctx) { }
+	@Override public void exitQuery(xmlParser.QueryContext ctx) { 
+		
+		
+		Object ob = map.get(ctx.xquery());
+		this.obj = ob; 
+		xqobj = (xqQuery) ob;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -437,6 +444,8 @@ public class FinalBuilder extends xmlBaseListener {
 		xqRelativePath rpl = (xqRelativePath)map.get(ctx.relative_path().get(0));
 		xqRelativePath rpr = (xqRelativePath)map.get(ctx.relative_path().get(1));
 		String str = ctx.getChild(1).getText();
+		System.out.println(rpl.tagname + "  RPL");
+		System.out.println(rpr.tagname + "  RPR");        
 		 xqFilter xqFil =  new xqFilter(rpl,rpr,str);
 		 Object ob = xqFil;
 		 map.put(ctx,ob);
@@ -488,7 +497,8 @@ public class FinalBuilder extends xmlBaseListener {
 		xqRelativePath rpl = (xqRelativePath)map.get(ctx.relative_path().get(0));
 		xqRelativePath rpr = (xqRelativePath)map.get(ctx.relative_path().get(1));
 		String str = ctx.getChild(1).getText();
-		
+		System.out.println(rpl.tagname + "  RPL");
+		System.out.println(rpr.tagname + "  RPR");   
 		 xqFilter xqFil =  new xqFilter(rpl,rpr,str);
 		 Object ob = xqFil;
 		 map.put(ctx,ob);
@@ -771,8 +781,8 @@ public class FinalBuilder extends xmlBaseListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitX_var(xmlParser.X_varContext ctx) {
-		String str = ctx.getText().toString();
-		xqQuery xqr = new xqQuery("$",str);
+		xqVariable var = (xqVariable) map.get(ctx.var());
+		xqQuery xqr = new xqQuery(var);
 		Object object = xqr;
 		map.put(ctx,object);	
 	}
@@ -809,6 +819,18 @@ public class FinalBuilder extends xmlBaseListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterX_state(xmlParser.X_stateContext ctx) { 
+		
+		
+		
+		
+	}
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitX_state(xmlParser.X_stateContext ctx) { 
+		
 		xqQuery xq;
 		xqForClause xqfc = (xqForClause) map.get(ctx.forClause());
 		xqWhereClause xqwc = (xqWhereClause)map.get(ctx.whereClause());
@@ -829,12 +851,6 @@ public class FinalBuilder extends xmlBaseListener {
 		
 		
 	}
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitX_state(xmlParser.X_stateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1050,10 +1066,10 @@ public class FinalBuilder extends xmlBaseListener {
 		
 		 List<xqQuery> lxq = new ArrayList<xqQuery>();
 		 xqQuery temp;
-		 List<String> variable_list = new ArrayList<String>();
+		 List<xqVariable> variable_list = new ArrayList<xqVariable>();
 		 for(int i=0; i<ctx.var().size() ; i++) {
-			 
-			 variable_list.add(ctx.var(i).toString());
+			 xqVariable v = new xqVariable(ctx.var().get(i).toString());
+			 variable_list.add(v);
 			 
 		 }
 		 for(int i=0 ; i<ctx.xquery().size();i++){
@@ -1155,7 +1171,7 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitCondEq(xmlParser.CondEqContext ctx) {
 		xqQuery xql = (xqQuery) map.get(ctx.xquery(0));
 		xqQuery xqr = (xqQuery) map.get(ctx.xquery(1));
-		String oper = "= eq";
+		String oper = "eq";
 		Condition c= new Condition(xql,xqr,oper);
 		Object obj=c;
 		map.put(ctx, obj);	
@@ -1175,7 +1191,7 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitCondIs(xmlParser.CondIsContext ctx) { 
 		xqQuery xql = (xqQuery) map.get(ctx.xquery(0));
 		xqQuery xqr = (xqQuery) map.get(ctx.xquery(1));
-		String oper = "is==";
+		String oper = "is";
 		Condition c= new Condition(xql,xqr,oper);
 		Object obj=c;
 		map.put(ctx, obj);
@@ -1228,7 +1244,7 @@ public class FinalBuilder extends xmlBaseListener {
 	 */
 	@Override public void exitCondEmp(xmlParser.CondEmpContext ctx) { 
 		xqQuery xql = (xqQuery) map.get(ctx.xquery());
-		String oper="()";
+		String oper="empty";
 		Condition c=new Condition(xql,oper);
 		Object ob=this;
 		map.put(ctx, ob);

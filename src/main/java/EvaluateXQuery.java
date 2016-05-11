@@ -23,7 +23,9 @@ public class EvaluateXQuery {
 
 		HashMap<Object, ArrayList<Node>> hmap=new HashMap<Object,ArrayList<Node>>();    
 
-		String Query= "doc(sample2.xml)/class//.";
+		String Query= "doc(sample2.xml)/class/student";
+		
+		
 		  //  System.out.println("This sucks");
 
 		    ANTLRInputStream input = new ANTLRInputStream(Query);
@@ -33,21 +35,25 @@ public class EvaluateXQuery {
 
 		    lexer.reset();
 		    xmlParser parser = new xmlParser(tokens);	    
-			     	ParseTree tree = parser.absolute_path(); 
-			        String query = tree.getText();
-			        String filename = tree.getChild(2).getText();
+			     	ParseTree tree = parser.query(); 
+			       // String query = tree.getText();
+			        //String filename = tree.getChild(2).getText();
 			 
 			        System.out.println(tree.toStringTree(parser)); 
+			        
 			        ParseTreeWalker walker=new ParseTreeWalker();
 			        xmlBaseListener listener=new xmlBaseListener();
 			        FinalBuilder xmlwalk= new FinalBuilder();
 			        walker.walk(xmlwalk, tree);
 	                Object ob = xmlwalk.getObject();
-	                xqAbsolutePath xq =(xqAbsolutePath)ob;
+	               //xqAbsolutePath xq =(xqAbsolutePath)ob;
+	                xqQuery xq  = (xqQuery)ob;
 	                System.out.println(ob.getClass().getName());
-	                xq.evalxqAbsolutePath(hmap);
-		       
+	                xq.evaluatexqQuery(null, hmap);
+	                Util d;
+		            
 		    System.out.println(hmap.get(xq));
+		    
 		    System.out.println(hmap.get(xq).size());
 		
 		

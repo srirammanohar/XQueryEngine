@@ -11,7 +11,7 @@ import org.w3c.dom.NodeList;
 
 public class xqQuery {
 public  xqVariable var;
-public String str_constant;
+public String str_constant ;
 public   xqQuery xql;
 public   xqQuery xqr;
 public xqAbsolutePath xap;
@@ -30,7 +30,8 @@ public String operand;
 	public xqQuery( String str) {
 		// TODO Auto-generated constructor stub
 		this.var = null;
-		str_constant = str;
+		this.str_constant = str;
+		System.out.println("Inside the constructor ................" + str_constant);
 		xql = null;
 		xqr = null;
 		xap = null;
@@ -47,6 +48,7 @@ public String operand;
 		}
 	
 	public xqQuery( xqVariable v) {
+		
 		this.operand = null;
 		this.var = v;
 		xql = null;
@@ -61,12 +63,12 @@ public String operand;
 		left = null;
 		right =null;
 		xqxp = null;
-		str_constant = null;
+		str_constant = "";
 		}
 	
 	public xqQuery(xqAbsolutePath xapath ) {
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = null;
 		xqr = null;
 		xap = xapath;
@@ -83,7 +85,7 @@ public String operand;
 		}
 	public xqQuery(xqQuery xquery, String oper ) {
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = xquery;
 		xqr = null;
 		xap =  null;
@@ -100,7 +102,7 @@ public String operand;
 		}
 	public xqQuery(xqQuery xquery, String oper , xqQuery rgt ) {
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = xquery;
 		xqr = rgt;
 		xap =  null;
@@ -119,7 +121,7 @@ public String operand;
 	public xqQuery(String string, xqQuery xqap) {
 		// TODO Auto-generated constructor stub
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = xqap;
 		xqr = null;
 		xap =  null;
@@ -138,7 +140,7 @@ public String operand;
 	public xqQuery(xqQuery left2, xqQuery right2) {
 		// TODO Auto-generated constructor stub
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = left2;
 		xqr = right2;
 		xap =  null;
@@ -158,7 +160,7 @@ public String operand;
 	public xqQuery(xqQuery xqap, String operand2, xqRelativePath xrp) {
 		// TODO Auto-generated constructor stub
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = xqap;
 		xqr = null;
 		xap =  null;
@@ -178,7 +180,7 @@ public String operand;
 	public xqQuery(xqForClause xqfc, xqReturnClause xqrc) {
 		// TODO Auto-generated constructor stub
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = null;
 		xqr = null;
 		xap =  null;
@@ -199,7 +201,7 @@ public String operand;
 	public xqQuery(xqForClause xqfc, xqWhereClause xqwc, xqReturnClause xqrc) {
 		// TODO Auto-generated constructor stub
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = null;
 		xqr = null;
 		xap =  null;
@@ -218,7 +220,7 @@ public String operand;
 	public xqQuery(xqForClause xqfc, xqLetClause xqlc, xqReturnClause xqrc) {
 		// TODO Auto-generated constructor stub
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = null;
 		xqr = null;
 		xap =  null;
@@ -237,7 +239,7 @@ public String operand;
 	public xqQuery(xqForClause xqfc, xqWhereClause xqwc, xqLetClause xqlc, xqReturnClause xqrc) {
 		// TODO Auto-generated constructor stub
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = null;
 		xqr = null;
 		xap =  null;
@@ -257,7 +259,7 @@ public String operand;
 	public xqQuery(xqLetClause let, xqQuery xq) {
 		// TODO Auto-generated constructor stub
 		this.var = null;
-		this.str_constant = null;
+		this.str_constant = "";
 		xql = xq;
 		xqr = null;
 		xap =  null;
@@ -300,7 +302,7 @@ public String operand;
 	public void evaluatexqQuery(Node n, HashMap<Object , ArrayList<Node>> hmap ){
 		
 		
-		System.out.println("Inside evaluate xquery");
+		System.out.println("Inside evaluate xquery..." + this.str_constant);
         
 		ArrayList<Node> return_list = new ArrayList<Node>();
 		ArrayList<Node>curr_list = new ArrayList<Node>();
@@ -314,18 +316,20 @@ public String operand;
 			 this.xql.evaluatexqQuery(n, hmap);
 			 return_list = hmap.get(this.xql);
 			 this.xqr.evaluatexqQuery(n, hmap);
+			 if(hmap.containsKey(this.xqr)) {
 			 curr_list = hmap.get(this.xqr);
-			 return_list.addAll(curr_list);
+			 if(curr_list != null)
+			 return_list.addAll(curr_list); }
 			 hmap.put(this, return_list);
 			 
 			 
 		 }
-		if(str_constant!=null && operand == null &&  var == null && xql==null && xqr ==null && xap==null && xqrpl == null
-		&& xqfor==null && xqwhere==null && xqlet==null && xqret ==null && left ==null && right== null &&xqxp==null && operand==null )
+		 
+		 else if(!this.str_constant.isEmpty()  && left ==null   )
 		{	
-			System.out.println("Inside string constant :"+str_constant);
+			
 			Util u = new Util();
-			Node d = u.make_text(str_constant);
+			Node d = u.make_text(str_constant.substring(1,str_constant.length()-1));
 			ArrayList<Node>  dlist = new ArrayList<Node>();
 			dlist.add(d);
 			hmap.put(this, dlist);
@@ -359,17 +363,13 @@ public String operand;
 			
 			
 		}
-
-		
-		
-		
-	
 	
 	 if(this.xqrpl !=null && this.xql != null && this.operand == "/") {
 		 System.out.println("Inside ()/////// ");
 
 		 this.xql.evaluatexqQuery(n, hmap);
 		 return_list = hmap.get(this.xql);
+		 if(return_list!=null) {
 		 for(int i=0 ;i <return_list.size();i++) {
 			 NodeList x = return_list.get(i).getChildNodes();
 			 for(int j=0 ; j<x.getLength(); j++ ) {
@@ -378,11 +378,8 @@ public String operand;
 				 curr_list = hmap.get(this.xqrpl);
 				 return_list.addAll(curr_list);
 				 
-			 }
-			 
-			 
-			 
-		 }
+			 }			 
+		 }}
 		 
 		 obj = this;
 		hmap.put(obj, return_list);
@@ -392,7 +389,7 @@ public String operand;
 	 }
 	 
  if(this.xqrpl !=null && this.xql != null && this.operand == "//") {
-	 System.out.println("Inside (tyrbe/////) ");
+	 
 
 	 Node curr_node = null;
 		NodeList c;

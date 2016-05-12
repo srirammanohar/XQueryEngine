@@ -24,24 +24,12 @@ public class xqForClause {
 	ArrayList<Node> evalxqForClause(HashMap<Object, ArrayList<Node>> hmap , Node n , xqLetClause xqlet, xqWhereClause xqwhere, xqReturnClause xqret ) {
 		
 		ArrayList<xqVariable> retu_list = new ArrayList<xqVariable>();
-		ArrayList<ArrayList<Node>> global_list = new ArrayList<ArrayList<Node>> ();
+		ArrayList<ArrayList<Node>> global_list = new ArrayList<ArrayList<Node>> (this.xqlist.size());
 		ArrayList<Node> inner = new ArrayList<Node>();
 		//glob_ret_list.clear();
-		for(int i =0 ; i<xqlist.size(); i++) {
-			System.out.println(xqlist.get(i).toString() + "String obj");
-			xqlist.get(i).evaluatexqQuery(n, hmap);
-			inner = hmap.get(xqlist.get(i));
-			System.out.println(inner.toString() + "hgfbdnm");
-			//glob_ret_list.addAll(inner);
-			global_list.add(inner);
+		System.out.println(this.xqlist.size());
 		
-		   // hmap.put(varlist.get(i), hmap.get(xqlist.get(i)));
-			
-		retu_list.add(varlist.get(i));
-			
-		}
-		
-		evaluate(hmap,n,global_list,xqlet,xqwhere,xqret,0);
+	evaluate_help(hmap,n,global_list,xqlet,xqwhere,xqret,0);
 		
 		
 		return glob_ret_list;
@@ -50,31 +38,54 @@ public class xqForClause {
 		
 	}
 
-	public void evaluate(HashMap<Object, ArrayList<Node>> hmap, Node node, ArrayList<ArrayList<Node>> lista, xqLetClause xqlet, xqWhereClause xqwhere, xqReturnClause xqret , int pos ) {
+	
+	
+	public void evaluate_help(HashMap<Object, ArrayList<Node>> hmap, Node node, ArrayList<ArrayList<Node>> lista, xqLetClause xqlet, xqWhereClause xqwhere, xqReturnClause xqret , int pos) {
+		ArrayList<Node> xquery_result = new ArrayList<Node>();
 		
-		
-		ArrayList<Node> curr_list = new ArrayList<Node>();
-		
-		if(pos == lista.size()) {
-			 System.out.println("Inserting variavble" + "\t \t" + lista.size()  );
-			xqret.evalxqRet(node,hmap);
-			curr_list = hmap.get(xqret);
-			if(!curr_list.isEmpty()) { System.out.println("Inside the *********" + curr_list.size());}
-			glob_ret_list.addAll(curr_list);
-		
-		}
-		else
+		System.out.println("Inside Evaluate Help" + pos + lista.size());
+		if(pos == xqlist.size())
 		{
+			boolean where_result = true;
+		 if(xqlet!=null) xqlet.evaluatelet(node, hmap);
+			
+			if (xqwhere != null)
+			{
+				where_result = xqwhere.evaluateWhere(hmap, node);
+				
+			}
+			if(where_result == true)
+			{
+				ArrayList<Node> returnclause_list = new ArrayList<Node>();
+						xqret.evalxqRet(node, hmap);
+						returnclause_list = hmap.get(xqret);
+				//if(returnclause_list!=null)
+				//{
+					for(int k=0;k<returnclause_list.size();k++)
+					{   System.out.println("Inside return list");
+						glob_ret_list.add((Node)returnclause_list.get(k));
+					}
+				//}
+			}
+		}
+		//else if(pos >= this.xqlist.size()) return;
+		else
+		{	System.out.println("Sizeeeeeeeeeeeeee" + pos+""+lista.size());
+			this.xqlist.get(pos).evaluatexqQuery(node, hmap);
+	         if(hmap.containsKey(this.xqlist.get(pos)))
+			 xquery_result = hmap.get(this.xqlist.get(pos));
+			lista.add(xquery_result);
+			if(lista.get(pos) == null) return;
 			for(int j=0;j<lista.get(pos).size();j++)
-			{   System.out.println("Inserting variavble" + this.varlist.get(pos).name + "\t \t"  );
+			{	
 				ArrayList<Node> temp = new ArrayList<Node>();
 				temp.add(lista.get(pos).get(j));
 				hmap.put(this.varlist.get(pos), temp);
-				System.out.println("Inserting variavble" + this.varlist.get(pos).name + "\t \t" + temp );
-				evaluate(hmap,node,lista,xqlet,xqwhere,xqret,pos+1);
+				evaluate_help(hmap,node,lista,xqlet,xqwhere,xqret,pos+1);
 			}
 		}
 	}
+	
 	
 	
 }

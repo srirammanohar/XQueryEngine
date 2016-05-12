@@ -62,7 +62,7 @@ public class Util {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	tag_name =	tag_name.substring(1, tag_name.length()-1);
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement(tag_name);
 		Node x = (Node)rootElement;

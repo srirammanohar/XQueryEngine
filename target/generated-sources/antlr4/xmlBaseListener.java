@@ -28,18 +28,6 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPathSlash(@NotNull xmlParser.PathSlashContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPathSlash(@NotNull xmlParser.PathSlashContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterOpenBracket(@NotNull xmlParser.OpenBracketContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -184,18 +172,6 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJand(@NotNull xmlParser.JandContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJand(@NotNull xmlParser.JandContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterApdesc(@NotNull xmlParser.ApdescContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -203,18 +179,6 @@ public class xmlBaseListener implements xmlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitApdesc(@NotNull xmlParser.ApdescContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPathAp(@NotNull xmlParser.PathApContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPathAp(@NotNull xmlParser.PathApContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -251,18 +215,6 @@ public class xmlBaseListener implements xmlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRp_rp(@NotNull xmlParser.Rp_rpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFor_j(@NotNull xmlParser.For_jContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFor_j(@NotNull xmlParser.For_jContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -400,13 +352,13 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJEq(@NotNull xmlParser.JEqContext ctx) { }
+	@Override public void enterString_constant(@NotNull xmlParser.String_constantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJEq(@NotNull xmlParser.JEqContext ctx) { }
+	@Override public void exitString_constant(@NotNull xmlParser.String_constantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -532,18 +484,6 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterReturnJ(@NotNull xmlParser.ReturnJContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitReturnJ(@NotNull xmlParser.ReturnJContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterRp_dotdot(@NotNull xmlParser.Rp_dotdotContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -652,18 +592,6 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJEqS(@NotNull xmlParser.JEqSContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJEqS(@NotNull xmlParser.JEqSContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterXInd(@NotNull xmlParser.XIndContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -707,18 +635,6 @@ public class xmlBaseListener implements xmlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRp_simple(@NotNull xmlParser.Rp_simpleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterRewriteXq(@NotNull xmlParser.RewriteXqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRewriteXq(@NotNull xmlParser.RewriteXqContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -228,13 +228,6 @@ public interface xmlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCloseBracket(xmlParser.CloseBracketContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code rewriteXq}
-	 * labeled alternative in {@link xmlParser#oxquery}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRewriteXq(xmlParser.RewriteXqContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code xInd}
 	 * labeled alternative in {@link xmlParser#xquery}.
 	 * @param ctx the parse tree
@@ -324,54 +317,6 @@ public interface xmlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitId(xmlParser.IdContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code for_j}
-	 * labeled alternative in {@link xmlParser#forJ}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFor_j(xmlParser.For_jContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code pathAp}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPathAp(xmlParser.PathApContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code pathSlash}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPathSlash(xmlParser.PathSlashContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code jEq}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJEq(xmlParser.JEqContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code jEqS}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJEqS(xmlParser.JEqSContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code jand}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJand(xmlParser.JandContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link xmlParser#returnJ}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitReturnJ(xmlParser.ReturnJContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link xmlParser#forClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -457,4 +402,10 @@ public interface xmlVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitVar(xmlParser.VarContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link xmlParser#string_constant}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitString_constant(xmlParser.String_constantContext ctx);
 }

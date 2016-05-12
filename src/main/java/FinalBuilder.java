@@ -686,18 +686,7 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRewriteXq(xmlParser.RewriteXqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRewriteXq(xmlParser.RewriteXqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
+	
 	@Override public void enterXInd(xmlParser.XIndContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -938,6 +927,7 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitX_str(xmlParser.X_strContext ctx) { 
 		
 		String str = ctx.getText().toString();
+		System.out.println("she sells the ");
 		xqQuery xqr = new xqQuery(str);
 		Object object = xqr;
 		map.put(ctx,object);
@@ -974,92 +964,7 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFor_j(xmlParser.For_jContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFor_j(xmlParser.For_jContext ctx) {
-		
-	}
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPathAp(xmlParser.PathApContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPathAp(xmlParser.PathApContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPathSlash(xmlParser.PathSlashContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPathSlash(xmlParser.PathSlashContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterJEq(xmlParser.JEqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJEq(xmlParser.JEqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterJEqS(xmlParser.JEqSContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJEqS(xmlParser.JEqSContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterJand(xmlParser.JandContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJand(xmlParser.JandContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterReturnJ(xmlParser.ReturnJContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitReturnJ(xmlParser.ReturnJContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
+	
 	@Override public void enterForClause(xmlParser.ForClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1102,10 +1007,10 @@ public class FinalBuilder extends xmlBaseListener {
 		
 		 List<xqQuery> lxq = new ArrayList<xqQuery>();
 		 xqQuery temp;
-		 List<String> variable_list = new ArrayList<String>();
+		 List<xqVariable> variable_list = new ArrayList<xqVariable>();
 		 for(int i=0; i<ctx.var().size() ; i++) {
-			 
-			 variable_list.add(ctx.var(i).toString());
+			 xqVariable v = new xqVariable(ctx.var().get(i).getText().toString());
+			 variable_list.add(v);
 			 
 		 }
 		 for(int i=0 ; i<ctx.xquery().size();i++){
@@ -1176,6 +1081,7 @@ public class FinalBuilder extends xmlBaseListener {
 		xqQuery xql = (xqQuery) map.get(ctx.xquery(0));
 		xqQuery xqr = (xqQuery) map.get(ctx.xquery(1));
 		String oper = "eq";
+		System.out.println("This is inside contrcut....."  + xqr.str_constant);
 		Condition c= new Condition(xql,xqr,oper);
 		Object obj=c;
 		map.put(ctx, obj);	

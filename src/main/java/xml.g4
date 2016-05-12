@@ -59,16 +59,16 @@ AlphaNumeric
 openBracket		:	'(';
 closeBracket	:	')';
 
-oxquery: 'for' forJ 'where' condJ 'return' returnJ #rewriteXq;
+
 
 xquery : var    #x_var
-   | String_constant    #x_str
+   | string_constant    #x_str
    | absolute_path     #x_ap
    | '(' xquery ')'     #x_simple
    | xquery ',' xquery      #xInd
    | xquery '/' relative_path      #x_slash
    | xquery '//' relative_path   #x_desc
-   | '<' lt=Id '>' '{' xquery '}' '</' rt=Id '>'    #x_node
+   | '<' lt=AlphaNumeric'>' '{' xquery '}' '</' rt=AlphaNumeric '>'    #x_node
    | forClause (letClause)? (whereClause)? returnClause #x_state
    | letClause xquery   #xLet
    | 'join' '(' left=xquery ',' right=xquery ',' leftlist=list ',' rightlist=list ')' #x_join
@@ -78,23 +78,6 @@ list : '[' (id (',' id)*)* ']' ;
 
 id : AlphaNumeric ;
 
-forJ : var 'in' path (',' var 'in' path)*  #for_j ;
-
-path : absolute_path #pathAp
-     | var ('/'|'//') relative_path #pathSlash
-     ;
-
-condJ : left=var ('eq'|'=') right=var #jEq
-      | lt=var ('eq'|'=') rt=String_constant #jEqS
-      | left=condJ 'and' right=condJ #jand
-      ;
-
-returnJ :path
-        |  var
-        | '(' returnJ ')'',' '(' returnJ ')'
-        | returnJ ',' returnJ
-        | '<' lt=Id '>' '{' returnJ '}' '</' rt=Id '>'
-        ;
 
 forClause : 'for' var 'in' xquery (',' var 'in' xquery)* ;
 
@@ -121,7 +104,7 @@ cond : left=xquery '=' right=xquery              #condEq
 var : '$'AlphaNumeric;
 
 
-String_constant : [^"][_A-Za-z0-9-.!, ]*["$] ;
+string_constant : '"'AlphaNumeric'"' ;
 
 
 

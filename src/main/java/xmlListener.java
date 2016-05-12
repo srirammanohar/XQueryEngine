@@ -379,18 +379,6 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitCloseBracket(xmlParser.CloseBracketContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code rewriteXq}
-	 * labeled alternative in {@link xmlParser#oxquery}.
-	 * @param ctx the parse tree
-	 */
-	void enterRewriteXq(xmlParser.RewriteXqContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code rewriteXq}
-	 * labeled alternative in {@link xmlParser#oxquery}.
-	 * @param ctx the parse tree
-	 */
-	void exitRewriteXq(xmlParser.RewriteXqContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code xInd}
 	 * labeled alternative in {@link xmlParser#xquery}.
 	 * @param ctx the parse tree
@@ -543,88 +531,6 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitId(xmlParser.IdContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code for_j}
-	 * labeled alternative in {@link xmlParser#forJ}.
-	 * @param ctx the parse tree
-	 */
-	void enterFor_j(xmlParser.For_jContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code for_j}
-	 * labeled alternative in {@link xmlParser#forJ}.
-	 * @param ctx the parse tree
-	 */
-	void exitFor_j(xmlParser.For_jContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code pathAp}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 */
-	void enterPathAp(xmlParser.PathApContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code pathAp}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 */
-	void exitPathAp(xmlParser.PathApContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code pathSlash}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 */
-	void enterPathSlash(xmlParser.PathSlashContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code pathSlash}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 */
-	void exitPathSlash(xmlParser.PathSlashContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code jEq}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void enterJEq(xmlParser.JEqContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code jEq}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void exitJEq(xmlParser.JEqContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code jEqS}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void enterJEqS(xmlParser.JEqSContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code jEqS}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void exitJEqS(xmlParser.JEqSContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code jand}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void enterJand(xmlParser.JandContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code jand}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void exitJand(xmlParser.JandContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link xmlParser#returnJ}.
-	 * @param ctx the parse tree
-	 */
-	void enterReturnJ(xmlParser.ReturnJContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link xmlParser#returnJ}.
-	 * @param ctx the parse tree
-	 */
-	void exitReturnJ(xmlParser.ReturnJContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link xmlParser#forClause}.
 	 * @param ctx the parse tree
 	 */
@@ -770,4 +676,14 @@ public interface xmlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVar(xmlParser.VarContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xmlParser#string_constant}.
+	 * @param ctx the parse tree
+	 */
+	void enterString_constant(xmlParser.String_constantContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xmlParser#string_constant}.
+	 * @param ctx the parse tree
+	 */
+	void exitString_constant(xmlParser.String_constantContext ctx);
 }

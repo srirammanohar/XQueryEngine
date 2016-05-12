@@ -18,18 +18,6 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitWhereClause(@NotNull xmlParser.WhereClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code pathSlash}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 */
-	void enterPathSlash(@NotNull xmlParser.PathSlashContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code pathSlash}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 */
-	void exitPathSlash(@NotNull xmlParser.PathSlashContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link xmlParser#openBracket}.
 	 * @param ctx the parse tree
 	 */
@@ -164,18 +152,6 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitId(@NotNull xmlParser.IdContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jand}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void enterJand(@NotNull xmlParser.JandContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code jand}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void exitJand(@NotNull xmlParser.JandContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code apdesc}
 	 * labeled alternative in {@link xmlParser#absolute_path}.
 	 * @param ctx the parse tree
@@ -187,18 +163,6 @@ public interface xmlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitApdesc(@NotNull xmlParser.ApdescContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code pathAp}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 */
-	void enterPathAp(@NotNull xmlParser.PathApContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code pathAp}
-	 * labeled alternative in {@link xmlParser#path}.
-	 * @param ctx the parse tree
-	 */
-	void exitPathAp(@NotNull xmlParser.PathApContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code x_join}
 	 * labeled alternative in {@link xmlParser#xquery}.
@@ -235,18 +199,6 @@ public interface xmlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRp_rp(@NotNull xmlParser.Rp_rpContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code for_j}
-	 * labeled alternative in {@link xmlParser#forJ}.
-	 * @param ctx the parse tree
-	 */
-	void enterFor_j(@NotNull xmlParser.For_jContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code for_j}
-	 * labeled alternative in {@link xmlParser#forJ}.
-	 * @param ctx the parse tree
-	 */
-	void exitFor_j(@NotNull xmlParser.For_jContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code filter_is}
 	 * labeled alternative in {@link xmlParser#filter}.
@@ -372,17 +324,15 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitXLet(@NotNull xmlParser.XLetContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jEq}
-	 * labeled alternative in {@link xmlParser#condJ}.
+	 * Enter a parse tree produced by {@link xmlParser#string_constant}.
 	 * @param ctx the parse tree
 	 */
-	void enterJEq(@NotNull xmlParser.JEqContext ctx);
+	void enterString_constant(@NotNull xmlParser.String_constantContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code jEq}
-	 * labeled alternative in {@link xmlParser#condJ}.
+	 * Exit a parse tree produced by {@link xmlParser#string_constant}.
 	 * @param ctx the parse tree
 	 */
-	void exitJEq(@NotNull xmlParser.JEqContext ctx);
+	void exitString_constant(@NotNull xmlParser.String_constantContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code rp_tag}
 	 * labeled alternative in {@link xmlParser#relative_path}.
@@ -502,16 +452,6 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitFilter_and(@NotNull xmlParser.Filter_andContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link xmlParser#returnJ}.
-	 * @param ctx the parse tree
-	 */
-	void enterReturnJ(@NotNull xmlParser.ReturnJContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link xmlParser#returnJ}.
-	 * @param ctx the parse tree
-	 */
-	void exitReturnJ(@NotNull xmlParser.ReturnJContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code rp_dotdot}
 	 * labeled alternative in {@link xmlParser#relative_path}.
 	 * @param ctx the parse tree
@@ -620,18 +560,6 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitX_simple(@NotNull xmlParser.X_simpleContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jEqS}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void enterJEqS(@NotNull xmlParser.JEqSContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code jEqS}
-	 * labeled alternative in {@link xmlParser#condJ}.
-	 * @param ctx the parse tree
-	 */
-	void exitJEqS(@NotNull xmlParser.JEqSContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code xInd}
 	 * labeled alternative in {@link xmlParser#xquery}.
 	 * @param ctx the parse tree
@@ -677,18 +605,6 @@ public interface xmlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRp_simple(@NotNull xmlParser.Rp_simpleContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code rewriteXq}
-	 * labeled alternative in {@link xmlParser#oxquery}.
-	 * @param ctx the parse tree
-	 */
-	void enterRewriteXq(@NotNull xmlParser.RewriteXqContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code rewriteXq}
-	 * labeled alternative in {@link xmlParser#oxquery}.
-	 * @param ctx the parse tree
-	 */
-	void exitRewriteXq(@NotNull xmlParser.RewriteXqContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code x_slash}
 	 * labeled alternative in {@link xmlParser#xquery}.

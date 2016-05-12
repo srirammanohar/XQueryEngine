@@ -129,55 +129,51 @@ public Condition condright;
 			return return_list.isEmpty();
 	
 		}
-		else if((xql!=null) && (xqr != null) && op.equals("eq") ) {
-			NodeList x = node.getChildNodes();
-			int iter;
-			for(int i=0; i< x.getLength();i++){
+		else if((xql!=null) && (xqr != null) && op.equals("eq")  ) {
 			
-					this.xql.evaluatexqQuery(x.item(i), hmap);
-					 filter_list_left.addAll(hmap.get(this.xql)) ;
-					 this.xqr.evaluatexqQuery(x.item(i), hmap);
-					 filter_list_right.addAll(hmap.get(this.xqr));
-					 }
-
-	        if(filter_list_left.size() != filter_list_right.size()) return false;
-	         iter = filter_list_left.size();
-				    for(int j=0; j< iter  ; j++){
-				    	 
-				    	 System.out.println("INSIDE THE LOOP");
-				    	 if(!filter_list_left.get(j).isEqualNode(filter_list_right.get(j)) && filter_list_right.get(j)!=null){
-				    		//if(!filter_list_left.get(j).getTextContent().toString().equals(filter_list_right.get(j).getTextContent().toString())){ 
-				    		 return false;   	
-				    	 }
-				     }
-				    return true;				
-			
-			
+			this.xql.evaluatexqQuery(node, hmap);
+			ArrayList<Node> ret_list = new ArrayList<Node>();
+			ret_list = hmap.get(this.xql);
+			this.xqr.evaluatexqQuery(node, hmap);
+			ArrayList<Node> ret_right = new ArrayList<Node>();
+			ret_right = hmap.get(this.xqr); 
+			System.out.println(ret_right.size() + " " + ret_list.size());
+			if(ret_right.size()!= ret_list.size()) return false;
+			else {
+				
+				for(int i =0 ; i<ret_list.size() ; i++ ){
+					
+					if(! ret_list.get(i).isEqualNode(ret_right.get(i))) {
+						return false;}
+					
+				}
+					
+			}
+			return true;
+		
+		
 		}
 		else if((xql!=null) && (xqr != null) && op.equals("is") ) {
 			
-			NodeList x = node.getChildNodes();
-			int iter;
-			for(int i=0; i< x.getLength();i++){
-			
-					this.xql.evaluatexqQuery(x.item(i), hmap);
-					 filter_list_left.addAll(hmap.get(this.xql)) ;
-					 this.xqr.evaluatexqQuery(x.item(i), hmap);
-					 filter_list_right.addAll(hmap.get(this.xqr));
-					 }
-
-	        if(filter_list_left.size() != filter_list_right.size()) return false;
-	         iter = filter_list_left.size();
-				    for(int j=0; j< iter  ; j++){
-				    	 
-				    	 System.out.println("INSIDE THE LOOP");
-				    	 if(!filter_list_left.get(j).isSameNode(filter_list_right.get(j)) && filter_list_right.get(j)!=null){
-				    		//if(!filter_list_left.get(j).getTextContent().toString().equals(filter_list_right.get(j).getTextContent().toString())){ 
-				    		 return false;   	
-				    	 }
-				     }
-				    return true;		
-			
+			this.xql.evaluatexqQuery(node, hmap);
+			ArrayList<Node> ret_list = new ArrayList<Node>();
+			ret_list = hmap.get(this.xql);
+			this.xqr.evaluatexqQuery(node, hmap);
+			ArrayList<Node> ret_right = new ArrayList<Node>();
+			ret_right = hmap.get(this.xqr); 
+			System.out.println(ret_right.size() + " " + ret_list.size());
+			if(ret_right.size()!= ret_list.size()) return false;
+			else {
+				
+				for(int i =0 ; i<ret_list.size() ; i++ ){
+					
+					if(! ret_list.get(i).isSameNode(ret_right.get(i))) {
+						return false;}
+					
+				}
+					
+			}
+			return true;
 		}
 		
 		

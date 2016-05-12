@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import org.w3c.dom.Node;
 
 public class xqWhereClause {
 
@@ -14,6 +18,17 @@ public class xqWhereClause {
 		
 	}
 	
+	
+	boolean evaluateWhere(HashMap<Object, ArrayList<Node>> hmap, Node node) {
+		
+		
+		return this.where_con.evalCondition(node, hmap);
+		
+		
+		
+		
+		
+	}
 	
 	
 

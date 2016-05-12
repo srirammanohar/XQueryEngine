@@ -781,10 +781,14 @@ public class FinalBuilder extends xmlBaseListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitX_var(xmlParser.X_varContext ctx) {
-		xqVariable var = (xqVariable) map.get(ctx.var());
+		//xqVariable var = (xqVariable) map.get(ctx.var());
+		xqVariable var=new xqVariable(ctx.getText().toString());
 		xqQuery xqr = new xqQuery(var);
 		Object object = xqr;
 		map.put(ctx,object);	
+		
+		
+		
 	}
 	/**
 	 * {@inheritDoc}
@@ -1068,7 +1072,7 @@ public class FinalBuilder extends xmlBaseListener {
 		 xqQuery temp;
 		 List<xqVariable> variable_list = new ArrayList<xqVariable>();
 		 for(int i=0; i<ctx.var().size() ; i++) {
-			 xqVariable v = new xqVariable(ctx.var().get(i).toString());
+			 xqVariable v = new xqVariable(ctx.var().get(i).getText().toString());
 			 variable_list.add(v);
 			 
 		 }
@@ -1339,8 +1343,9 @@ public class FinalBuilder extends xmlBaseListener {
 	 */
 	@Override public void exitVar(xmlParser.VarContext ctx) {
 		
-		 xqVariable var = new xqVariable(ctx.getText());
-		 Object ob = var;
+		 xqVariable var = new xqVariable(ctx.getText().toString());
+		 xqQuery xqr = new xqQuery(var); 
+		 Object ob = xqr;
 		 map.put(ctx,ob);
 		
 		

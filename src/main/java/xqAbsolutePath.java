@@ -70,7 +70,8 @@ public class xqAbsolutePath {
         				   if(!ignore_textnode(returnnode.get(k)))
         				   curr_list.add(returnnode.get(k));
         			        				   
-        			   }    					
+        			   }  
+        			   System.out.println("Size inside loop is " + curr_list.size());
         		}
         	}
         }
@@ -107,8 +108,9 @@ public class xqAbsolutePath {
         }
        if(hmap.containsKey(rel_path))
 		returnnode = hmap.get(rel_path);
-		System.out.println(returnnode.size());
+		System.out.println("Size returned from ab path is"+curr_list.size());
 		hmap.put(this, curr_list);
+		
 
 	
 	

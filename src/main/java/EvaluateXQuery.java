@@ -23,7 +23,8 @@ public class EvaluateXQuery {
 
 		HashMap<Object, ArrayList<Node>> hmap=new HashMap<Object,ArrayList<Node>>();    
 
-		String Query= "doc(sample2.xml)/class/student";
+		String Query= "for $x in doc(sample2.xml)/class/student ,$y in doc(sample2.xml)/name return $y";
+		String Query1="damaka";
 		
 		
 		  //  System.out.println("This sucks");
@@ -48,13 +49,13 @@ public class EvaluateXQuery {
 	                Object ob = xmlwalk.getObject();
 	               //xqAbsolutePath xq =(xqAbsolutePath)ob;
 	                xqQuery xq  = (xqQuery)ob;
-	                System.out.println(ob.getClass().getName());
+	                //System.out.println(ob.getClass().getName());
 	                xq.evaluatexqQuery(null, hmap);
 	                Util d;
 		            
 		    System.out.println(hmap.get(xq));
 		    
-		    System.out.println(hmap.get(xq).size());
+		   // System.out.println(hmap.get(xq).size());
 		
 		
 

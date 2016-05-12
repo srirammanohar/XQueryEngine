@@ -23,16 +23,16 @@ public class xqForClause {
   
 	ArrayList<Node> evalxqForClause(HashMap<Object, ArrayList<Node>> hmap , Node n , xqLetClause xqlet, xqWhereClause xqwhere, xqReturnClause xqret ) {
 		
-		System.out.println("Inside for clause evaluation");
-		
 		ArrayList<xqVariable> retu_list = new ArrayList<xqVariable>();
 		ArrayList<ArrayList<Node>> global_list = new ArrayList<ArrayList<Node>> ();
 		ArrayList<Node> inner = new ArrayList<Node>();
 		
 		for(int i =0 ; i<xqlist.size(); i++) {
-			
+			System.out.println(xqlist.get(i).toString() + "String obj");
 			xqlist.get(i).evaluatexqQuery(n, hmap);
 			inner = hmap.get(xqlist.get(i));
+			System.out.println(inner.toString() + "hgfbdnm");
+			glob_ret_list.addAll(inner);
 			global_list.add(inner);
 		
 		   // hmap.put(varlist.get(i), hmap.get(xqlist.get(i)));
@@ -52,11 +52,11 @@ public class xqForClause {
 
 	public void evaluate(HashMap<Object, ArrayList<Node>> hmap, Node node, ArrayList<ArrayList<Node>> lista, xqLetClause xqlet, xqWhereClause xqwhere, xqReturnClause xqret , int pos ) {
 		
-		System.out.println("Inside multiple for");
 		
 		ArrayList<Node> curr_list = new ArrayList<Node>();
 		
 		if(pos == lista.size()) {
+			 System.out.println("Inserting variavble" + "\t \t" + lista.size()  );
 			xqret.evalxqRet(node,hmap);
 			curr_list = hmap.get(xqret);
 			glob_ret_list.addAll(curr_list);
@@ -64,10 +64,11 @@ public class xqForClause {
 		else
 		{
 			for(int j=0;j<lista.get(pos).size();j++)
-			{
+			{   System.out.println("Inserting variavble" + this.varlist.get(pos).name + "\t \t"  );
 				ArrayList<Node> temp = new ArrayList<Node>();
 				temp.add(lista.get(pos).get(j));
-				hmap.put(this.varlist.get(j), temp);
+				hmap.put(this.varlist.get(pos), temp);
+				System.out.println("Inserting variavble" + this.varlist.get(pos).name + "\t \t" + temp );
 				evaluate(hmap,node,lista,xqlet,xqwhere,xqret,pos+1);
 			}
 		}

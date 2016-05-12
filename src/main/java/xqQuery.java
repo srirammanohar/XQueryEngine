@@ -311,7 +311,8 @@ public String operand;
 		
 		if(str_constant!=null && operand == null &&  var == null && xql==null && xqr ==null && xap==null && xqrpl == null
 		&& xqfor==null && xqwhere==null && xqlet==null && xqret ==null && left ==null && right== null &&xqxp==null && operand==null )
-		{
+		{	
+			System.out.println("Inside string constant :"+str_constant);
 			Util u = new Util();
 			Node d = u.make_text(str_constant);
 			ArrayList<Node>  dlist = new ArrayList<Node>();
@@ -322,10 +323,10 @@ public String operand;
 		}
 		
 	 if(this.var!=null){
-		this.var.evaluatexqVariable(n, hmap);	
-		return_list = hmap.get(this.var);
+		 ArrayList<Node> var_list=var.get_variable(hmap);
+		 System.out.println("In var xquery putting value"+ this.var.name.toString()+"\t"+var_list);
 		 obj =this;
-		hmap.put(obj, return_list);
+		 hmap.put(obj, var_list);
 			
 			
 		}
@@ -432,10 +433,12 @@ public String operand;
 	}
 	
 	 if(this.xqfor !=null ) {
+		 
+		 System.out.println("INSIDE FOR");
 		
 		 ArrayList<Node> arr_list = new  ArrayList<Node>() ;
 		 arr_list = this.xqfor.evalxqForClause(hmap, n, this.xqlet, this.xqwhere, this.xqret);
-		
-		
+		System.out.println(arr_list.size() + "IS THE SIZE OF THE ARRLIST");
+		hmap.put(this, arr_list);
 	}
 }}

@@ -25,13 +25,14 @@ public class xqReturnClause {
 		System.out.println("Inside return");
 		// TODO Auto-generated method stub
 		ArrayList<Node> ret_list = new ArrayList<Node>();
-        if(node != null) {
+       
 		this.retxq.evaluatexqQuery(node, hmap);
-		
-		ret_list = hmap.get(this.retxq); }
+		System.out.println("Insidefjmfn return" + ret_list.size());
+
+		ret_list = hmap.get(this.retxq); 
 		Object ob = this;
 		hmap.put(ob, ret_list);
-		
+		//return ret_list;
 		
 	}
 

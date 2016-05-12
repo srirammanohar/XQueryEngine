@@ -1519,8 +1519,6 @@ public class xmlParser extends Parser {
 		}
 	}
 	public static class XIndContext extends XqueryContext {
-		public XqueryContext left;
-		public XqueryContext right;
 		public List<XqueryContext> xquery() {
 			return getRuleContexts(XqueryContext.class);
 		}
@@ -1940,14 +1938,13 @@ public class xmlParser extends Parser {
 					case 1:
 						{
 						_localctx = new XIndContext(new XqueryContext(_parentctx, _parentState));
-						((XIndContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_xquery);
 						setState(208);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(209);
 						match(T__15);
 						setState(210);
-						((XIndContext)_localctx).right = xquery(8);
+						xquery(8);
 						}
 						break;
 					case 2:
@@ -2032,7 +2029,7 @@ public class xmlParser extends Parser {
 			setState(233);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==Id) {
+			while (_la==AlphaNumeric) {
 				{
 				{
 				setState(223);
@@ -2075,7 +2072,7 @@ public class xmlParser extends Parser {
 	}
 
 	public static class IdContext extends ParserRuleContext {
-		public TerminalNode Id() { return getToken(xmlParser.Id, 0); }
+		public TerminalNode AlphaNumeric() { return getToken(xmlParser.AlphaNumeric, 0); }
 		public IdContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2102,7 +2099,7 @@ public class xmlParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(238);
-			match(Id);
+			match(AlphaNumeric);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3289,7 +3286,7 @@ public class xmlParser extends Parser {
 	}
 
 	public static class VarContext extends ParserRuleContext {
-		public TerminalNode Id() { return getToken(xmlParser.Id, 0); }
+		public TerminalNode AlphaNumeric() { return getToken(xmlParser.AlphaNumeric, 0); }
 		public VarContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3318,7 +3315,7 @@ public class xmlParser extends Parser {
 			setState(402);
 			match(T__38);
 			setState(403);
-			match(Id);
+			match(AlphaNumeric);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3496,7 +3493,7 @@ public class xmlParser extends Parser {
 		"\u00e8\3\2\2\2\u00e6\u00e4\3\2\2\2\u00e6\u00e7\3\2\2\2\u00e7\u00ea\3\2"+
 		"\2\2\u00e8\u00e6\3\2\2\2\u00e9\u00e1\3\2\2\2\u00ea\u00ed\3\2\2\2\u00eb"+
 		"\u00e9\3\2\2\2\u00eb\u00ec\3\2\2\2\u00ec\u00ee\3\2\2\2\u00ed\u00eb\3\2"+
-		"\2\2\u00ee\u00ef\7\21\2\2\u00ef\37\3\2\2\2\u00f0\u00f1\7+\2\2\u00f1!\3"+
+		"\2\2\u00ee\u00ef\7\21\2\2\u00ef\37\3\2\2\2\u00f0\u00f1\7*\2\2\u00f1!\3"+
 		"\2\2\2\u00f2\u00f3\5\64\33\2\u00f3\u00f4\7#\2\2\u00f4\u00fc\5$\23\2\u00f5"+
 		"\u00f6\7\22\2\2\u00f6\u00f7\5\64\33\2\u00f7\u00f8\7#\2\2\u00f8\u00f9\5"+
 		"$\23\2\u00f9\u00fb\3\2\2\2\u00fa\u00f5\3\2\2\2\u00fb\u00fe\3\2\2\2\u00fc"+
@@ -3549,7 +3546,7 @@ public class xmlParser extends Parser {
 		"\2\2\u018b\u0190\5\62\32\6\u018c\u018d\f\4\2\2\u018d\u018e\7\30\2\2\u018e"+
 		"\u0190\5\62\32\5\u018f\u0189\3\2\2\2\u018f\u018c\3\2\2\2\u0190\u0193\3"+
 		"\2\2\2\u0191\u018f\3\2\2\2\u0191\u0192\3\2\2\2\u0192\63\3\2\2\2\u0193"+
-		"\u0191\3\2\2\2\u0194\u0195\7)\2\2\u0195\u0196\7+\2\2\u0196\65\3\2\2\2"+
+		"\u0191\3\2\2\2\u0194\u0195\7)\2\2\u0195\u0196\7*\2\2\u0196\65\3\2\2\2"+
 		"\35FLZjl\u008b\u0093\u0095\u00bb\u00be\u00d0\u00db\u00dd\u00e6\u00eb\u00fc"+
 		"\u0104\u010f\u0116\u012e\u0135\u0143\u0151\u017b\u0187\u018f\u0191";
 	public static final ATN _ATN =

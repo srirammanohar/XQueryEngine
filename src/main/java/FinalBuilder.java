@@ -710,7 +710,7 @@ public class FinalBuilder extends xmlBaseListener {
 		xqQuery xqq = new xqQuery(left,right);
 		Object object = xqq;
 		map.put(ctx,object);
-		
+		System.out.println("Inside comma............................");
 		
 		
 		

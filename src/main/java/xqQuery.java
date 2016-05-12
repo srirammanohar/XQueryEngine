@@ -308,7 +308,18 @@ public String operand;
 		 Object obj =this;
 		 Stack<Node> stack_rp = new Stack<Node>();
 		
-		
+		 if(this.xql != null && this.xqr !=null) {
+			 System.out.println("Inside fvdcmns,() ");
+
+			 this.xql.evaluatexqQuery(n, hmap);
+			 return_list = hmap.get(this.xql);
+			 this.xqr.evaluatexqQuery(n, hmap);
+			 curr_list = hmap.get(this.xqr);
+			 return_list.addAll(curr_list);
+			 hmap.put(this, return_list);
+			 
+			 
+		 }
 		if(str_constant!=null && operand == null &&  var == null && xql==null && xqr ==null && xap==null && xqrpl == null
 		&& xqfor==null && xqwhere==null && xqlet==null && xqret ==null && left ==null && right== null &&xqxp==null && operand==null )
 		{	
@@ -340,7 +351,7 @@ public String operand;
 		}
 		
 		 if(operand == "()" && this.xql != null) {
-			
+			 System.out.println("Inside () ");
 			this.xql.evaluatexqQuery(n, hmap);
 			ArrayList<Node> arr_list = hmap.get(this.xql);
 			Object ob = this;
@@ -348,24 +359,15 @@ public String operand;
 			
 			
 		}
-	 if(this.xql != null && this.xqr !=null) {
-		 
-		 this.xql.evaluatexqQuery(n, hmap);
-		 return_list = hmap.get(this.xql);
-		 this.xqr.evaluatexqQuery(n, hmap);
-		 curr_list = hmap.get(this.xqr);
-		 return_list.addAll(curr_list);
-		 hmap.put(this, return_list);
-		 
-		 
-	 }
+
 		
 		
 		
 	
 	
 	 if(this.xqrpl !=null && this.xql != null && this.operand == "/") {
-		 
+		 System.out.println("Inside ()/////// ");
+
 		 this.xql.evaluatexqQuery(n, hmap);
 		 return_list = hmap.get(this.xql);
 		 for(int i=0 ;i <return_list.size();i++) {
@@ -390,7 +392,8 @@ public String operand;
 	 }
 	 
  if(this.xqrpl !=null && this.xql != null && this.operand == "//") {
-		 
+	 System.out.println("Inside (tyrbe/////) ");
+
 	 Node curr_node = null;
 		NodeList c;
 		this.xql.evaluatexqQuery(n, hmap);
@@ -420,7 +423,8 @@ public String operand;
 	 
 	
  if(left != null && this.right != null && this.xql != null && this.operand.equals("<>{}</>") ) {
-		
+	 System.out.println("Inside<>{}</>  ");
+
 	 this.xql.evaluatexqQuery(n, hmap);
 		ArrayList<Node> arr_list = hmap.get(this.xql);
 		Util u = new Util();
@@ -433,7 +437,6 @@ public String operand;
 	}
 	
 	 if(this.xqfor !=null ) {
-		 
 		 System.out.println("INSIDE FOR");
 		
 		 ArrayList<Node> arr_list = new  ArrayList<Node>() ;

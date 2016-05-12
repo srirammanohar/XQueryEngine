@@ -26,18 +26,18 @@ public class xqForClause {
 		ArrayList<xqVariable> retu_list = new ArrayList<xqVariable>();
 		ArrayList<ArrayList<Node>> global_list = new ArrayList<ArrayList<Node>> ();
 		ArrayList<Node> inner = new ArrayList<Node>();
-		
+		//glob_ret_list.clear();
 		for(int i =0 ; i<xqlist.size(); i++) {
 			System.out.println(xqlist.get(i).toString() + "String obj");
 			xqlist.get(i).evaluatexqQuery(n, hmap);
 			inner = hmap.get(xqlist.get(i));
 			System.out.println(inner.toString() + "hgfbdnm");
-			glob_ret_list.addAll(inner);
+			//glob_ret_list.addAll(inner);
 			global_list.add(inner);
 		
 		   // hmap.put(varlist.get(i), hmap.get(xqlist.get(i)));
 			
-		//	retu_list.add(varlist.get(i));
+		retu_list.add(varlist.get(i));
 			
 		}
 		
@@ -59,7 +59,9 @@ public class xqForClause {
 			 System.out.println("Inserting variavble" + "\t \t" + lista.size()  );
 			xqret.evalxqRet(node,hmap);
 			curr_list = hmap.get(xqret);
+			if(!curr_list.isEmpty()) { System.out.println("Inside the *********" + curr_list.size());}
 			glob_ret_list.addAll(curr_list);
+		
 		}
 		else
 		{

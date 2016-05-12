@@ -65,7 +65,7 @@ xquery : var    #x_var
    | String_constant    #x_str
    | absolute_path     #x_ap
    | '(' xquery ')'     #x_simple
-   | left=xquery ',' right=xquery      #xInd
+   | xquery ',' xquery      #xInd
    | xquery '/' relative_path      #x_slash
    | xquery '//' relative_path   #x_desc
    | '<' lt=Id '>' '{' xquery '}' '</' rt=Id '>'    #x_node
@@ -76,7 +76,7 @@ xquery : var    #x_var
 
 list : '[' (id (',' id)*)* ']' ;
 
-id : Id ;
+id : AlphaNumeric ;
 
 forJ : var 'in' path (',' var 'in' path)*  #for_j ;
 
@@ -118,14 +118,12 @@ cond : left=xquery '=' right=xquery              #condEq
 
 
 
-var : '$'Id;
+var : '$'AlphaNumeric;
 
-Id 	: 	AlphaNumeric    //[^_A-Za-z][_A-Za-z0-9-.]* 
-	;
 
 String_constant : [^"][_A-Za-z0-9-.!, ]*["$] ;
 
-Ws: [\t\r\n ]+ -> skip;
+
 
 WHITESPACE
 :

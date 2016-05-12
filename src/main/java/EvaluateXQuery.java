@@ -23,7 +23,7 @@ public class EvaluateXQuery {
 
 		HashMap<Object, ArrayList<Node>> hmap=new HashMap<Object,ArrayList<Node>>();    
 
-		String Query= "for $x in doc(sample2.xml)/class/student ,$y in doc(sample2.xml)/name return $y";
+		String Query= "for $x in doc(sample2.xml)/class/student ,$y in doc(sample2.xml)/name return ($x,$y)";
 		String Query1="damaka";
 		
 		

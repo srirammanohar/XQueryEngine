@@ -254,13 +254,6 @@ public class xmlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements xm
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitX_join(xmlParser.X_joinContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitXLet(xmlParser.XLetContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -310,6 +303,13 @@ public class xmlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements xm
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitXJoin(xmlParser.XJoinContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitX_str(xmlParser.X_strContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -317,7 +317,7 @@ public class xmlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements xm
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitList(xmlParser.ListContext ctx) { return visitChildren(ctx); }
+	@Override public T visitJoinattr(xmlParser.JoinattrContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -416,11 +416,4 @@ public class xmlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements xm
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitVar(xmlParser.VarContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitString_constant(xmlParser.String_constantContext ctx) { return visitChildren(ctx); }
 }

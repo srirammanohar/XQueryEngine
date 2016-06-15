@@ -423,18 +423,6 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterX_join(xmlParser.X_joinContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitX_join(xmlParser.X_joinContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterXLet(xmlParser.XLetContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -519,6 +507,18 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterXJoin(xmlParser.XJoinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXJoin(xmlParser.XJoinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterX_str(xmlParser.X_strContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -531,13 +531,13 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterList(xmlParser.ListContext ctx) { }
+	@Override public void enterJoinattr(xmlParser.JoinattrContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitList(xmlParser.ListContext ctx) { }
+	@Override public void exitJoinattr(xmlParser.JoinattrContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -706,18 +706,6 @@ public class xmlBaseListener implements xmlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVar(xmlParser.VarContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterString_constant(xmlParser.String_constantContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitString_constant(xmlParser.String_constantContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

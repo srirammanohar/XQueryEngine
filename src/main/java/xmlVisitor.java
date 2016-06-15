@@ -242,13 +242,6 @@ public interface xmlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitX_ap(xmlParser.X_apContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code x_join}
-	 * labeled alternative in {@link xmlParser#xquery}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitX_join(xmlParser.X_joinContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code xLet}
 	 * labeled alternative in {@link xmlParser#xquery}.
 	 * @param ctx the parse tree
@@ -298,6 +291,13 @@ public interface xmlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitX_simple(xmlParser.X_simpleContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code xJoin}
+	 * labeled alternative in {@link xmlParser#xquery}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXJoin(xmlParser.XJoinContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code x_str}
 	 * labeled alternative in {@link xmlParser#xquery}.
 	 * @param ctx the parse tree
@@ -305,11 +305,11 @@ public interface xmlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitX_str(xmlParser.X_strContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link xmlParser#list}.
+	 * Visit a parse tree produced by {@link xmlParser#joinattr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitList(xmlParser.ListContext ctx);
+	T visitJoinattr(xmlParser.JoinattrContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link xmlParser#id}.
 	 * @param ctx the parse tree
@@ -402,10 +402,4 @@ public interface xmlVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitVar(xmlParser.VarContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link xmlParser#string_constant}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitString_constant(xmlParser.String_constantContext ctx);
 }

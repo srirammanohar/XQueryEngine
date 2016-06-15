@@ -11,6 +11,7 @@ import javax.xml.transform.*;
 import java.io.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 
 public class Util {
@@ -18,40 +19,48 @@ public class Util {
 	
 	
 	public Util() {
-		// TODO Auto-generated constructor stub
+		
 			
+	}
+	
+
+	ArrayList<Node> remove_duplicates(ArrayList<Node> a) {
+		HashMap<Node,Integer > dupmap = new HashMap<Node,Integer>();
+		ArrayList<Node> ret_list = new ArrayList<Node>();
+		if(a == null) return a;
+		for (int i=0 ; i<a.size();i++){				
+			if(dupmap.containsKey(a.get(i))) continue;
+			else {
+				dupmap.put(a.get(i), 1);
+				ret_list.add(a.get(i));					
+			}				
+		}			
+		return ret_list;			
+	}
+	
+	/***** Source : Stack overflow ********/
+	public static String prettyFormat(String input, int indent) {
+	    try {
+	        Source xmlInput = new StreamSource(new StringReader(input));
+	        StringWriter stringWriter = new StringWriter();
+	        StreamResult xmlOutput = new StreamResult(stringWriter);
+	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	        transformerFactory.setAttribute("indent-number", indent);
+	        Transformer transformer = transformerFactory.newTransformer(); 
+	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+	        transformer.transform(xmlInput, xmlOutput);
+	        return xmlOutput.getWriter().toString();
+	    } catch (Exception e) {
+	        throw new RuntimeException(e); // simple exception handling, please review it
+	    }
+	}
+
+	public static String prettyFormat(String input) {
+	    return prettyFormat(input, 2);
 	}
 
 
-	void xml_print(Node node,int number_of_tabs)
-	{
-		if(node.getChildNodes().getLength() == 0  && node.getNodeType()==Node.TEXT_NODE)
-		{
-			System.out.println("\t" + node.getNodeValue().toString());
-		}
-		else
-		{
-			System.out.println();
-			for(int j=0;j<number_of_tabs;j++)
-				System.out.print("\t");
-			System.out.print("<" + node.getNodeName().toString());
-			for(int k=0;k<node.getAttributes().getLength();k++)
-			{
-				System.out.print(" " + node.getAttributes().item(k).getNodeName() 
-						+ "=" + "\"" + node.getAttributes().item(k).getNodeValue() + "\"");
-			}
-			System.out.print(">");
-			
-			NodeList child_list = node.getChildNodes();
-			for(int i=0;i<child_list.getLength();i++)
-			{
-				//print_tree(child_list.item(i),number_of_tabs+1);
-			}
-			for(int j=0;j<number_of_tabs;j++)
-				System.out.print("\t");
-			System.out.println("</" + node.getNodeName().toString() + ">");
-		}
-	}
+
 
 	Node makeElement(String tag_name, ArrayList<Node> s) {
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -62,22 +71,28 @@ public class Util {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	tag_name =	tag_name.substring(1, tag_name.length()-1);
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement(tag_name);
 		Node x = (Node)rootElement;
 		for(int i =0 ; i<s.size();i++) {
-			x.appendChild(s.get(i));
 			
-			
+			Node importedNode = doc.importNode(s.get(i), true);	
+			rootElement.appendChild(importedNode);		
 		}
 		
-		
-		return x;	
-		
-		
+		return x;			
 	}
 	
+	public ArrayList<Node> uniqueNodeList(ArrayList<Node> node_list)
+	{
+		//System.out.print("\n\nIncoming list"+node_list);
+		
+		Set<Node> node_set = new HashSet<Node>(node_list);
+		ArrayList<Node> final_list = new ArrayList<Node>(node_set);
+		//System.out.print("\nUpdated list"+final_list+"\n\n");
+		
+		return final_list;
+	}
 
 
 		Node make_text(String s){
@@ -92,8 +107,8 @@ public class Util {
 				}
 				Document doc = docBuilder.newDocument();
 				Node rootElement =  doc.createTextNode(s);
-				return rootElement;
-				
+				return rootElement;				
 		}
+		
 		
 }

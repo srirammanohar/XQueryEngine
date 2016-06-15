@@ -20,19 +20,20 @@ public class xqReturnClause {
 		
 	}
 
-	public void evalxqRet(Node node, HashMap<Object, ArrayList<Node>> hmap) {
+	public  void evalxqRet(Node node, HashMap<Object, ArrayList<Node>> hmap) {
 		
-		System.out.println("Inside return");
+		//System.out.println("Inside return" + this.retxq. );
 		// TODO Auto-generated method stub
 		ArrayList<Node> ret_list = new ArrayList<Node>();
        
 		this.retxq.evaluatexqQuery(node, hmap);
-		System.out.println("Insidefjmfn return" + ret_list.size());
-
+		
+		
 		ret_list = hmap.get(this.retxq); 
+		//System.out.println("Inside return" + ret_list.size());
 		Object ob = this;
 		hmap.put(ob, ret_list);
-		//return ret_list;
+		
 		
 	}
 

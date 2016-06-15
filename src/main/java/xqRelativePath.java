@@ -81,6 +81,8 @@ public class xqRelativePath {
 		//System.out.println( "relative path evaluation main");
 		//System.out.println("String in this rp is " + this.slash);
 		//System.out.println("tagname in this rp is " + this.tagname);
+		//System.out.println(this.tagname + "This is the tagname");
+		//System.out.println(node.getNodeName() + "This is the node name");
 		 Object obj =this;
 		 Stack<Node> stack_rp = new Stack<Node>();
 		 ArrayList<Node> children = new ArrayList<Node>();
@@ -92,12 +94,12 @@ public class xqRelativePath {
 		
 		if((this.tagname !=null )&& (this.tagname.startsWith("@"))){
 			obj=this;
-			System.out.println("Inside attribute evaluation");  
+			//System.out.println("Inside attribute evaluation");  
 	       // Element e = (org.w3c.dom.Element) node;
 			if(node.hasAttributes() )
 	        if(node.getAttributes().getNamedItem(this.tagname.substring(1, this.tagname.length()))!=null){
 			//if(e.hasAttribute(this.tagname.substring(1, this.tagname.length()))) {
-				System.out.println("Inside attribute tagname evaluation");
+				//System.out.println("Inside attribute tagname evaluation");
 				ale.add(node);
 			}
 			 hmap.put(obj,ale);
@@ -106,13 +108,15 @@ public class xqRelativePath {
 		else if(node.getNodeName().equals(this.tagname))
 		{
 			obj=this;
-			System.out.println("Inside tagname");
+			//System.out.println("Inside tagname" + this.tagname);
 	    	ale.add(node);
+	    	//System.out.println(node);
+	    //	System.out.println(ale.size());
 	    	hmap.put(this,ale);
 		}	
 		else if((this.tagname!=null)&& (this.tagname.equals("text()"))){
 			if (node.getNodeType()==Node.TEXT_NODE && (!ignore_textnode(node))){
-				System.out.println("Inside text()");
+				node.setTextContent(node.getTextContent());
 				ale.add(node);}
 			obj=this;
 			hmap.put(obj, ale);
@@ -122,7 +126,7 @@ public class xqRelativePath {
 	
 		else if((this.tagname!=null) && (this.tagname.equals("*"))) {
 				obj=this;
-				System.out.println("Inside star evaluation");
+				//System.out.println("Inside star evaluation");
 				//ArrayList<Node> ale = new ArrayList<Node>();
 		    	ale.add(node);
 		    	hmap.put(obj,ale);
@@ -131,26 +135,26 @@ public class xqRelativePath {
 		else if((this.tagname!=null) && (this.tagname.equals(".")))
 		{
 				obj=this;
-				System.out.println("Entering for .");
+				//System.out.println("Entering for .");
 				//ArrayList<Node> ale = new ArrayList<Node>();
-		    	ale.add(node);
+		    	ale.add(node.getParentNode());
 		    	hmap.put(obj,ale);
 		}
 		else if((this.tagname!=null) && (this.tagname.equals(".."))){
 			obj=this;
-			System.out.println("Inside .. evaluation");
+			//System.out.println("Inside .. evaluation");
 			//	ArrayList<Node> ale = new ArrayList<Node>();
-		    	ale.add(node.getParentNode());
+		    	ale.add(node.getParentNode().getParentNode());
 		    	hmap.put(obj,ale);
 			}
 			
 		else if((this.slash!=null)&& (this.slash.equals("/"))){
 			
-			System.out.println("Inside rp slash");
+		//	System.out.println("Inside rp slash");
 			this.left.evalxqRelativePath(node, hmap);
 			
 			 children = (ArrayList<Node>)hmap.get(this.left);
-			System.out.println(children.size() + "SIZE OF");
+			//System.out.println(children.size() + "SIZE OF");
 			for(int i=0 ; i<children.size(); i++)
 			{
 				NodeList childofchild = children.get(i).getChildNodes();	
@@ -174,13 +178,15 @@ public class xqRelativePath {
 			}
 			obj=this;
 			//System.out.println("Globallistsize" + global_list.size());
+			Util u = new Util();
+			global_list = u.remove_duplicates(global_list);
 			hmap.put(obj, global_list);
 			
 		}
 		
 		else if((this.slash!=null) && (this.slash.equals("//"))) {
 			Node curr_node = null;
-			System.out.println("Inside double slash evaluation");
+			//System.out.println("Inside double slash evaluation");
 			//ArrayList<Element> curr_node_children;
 			//System.out.println("Inside double slash");
 			NodeList c;
@@ -207,6 +213,8 @@ public class xqRelativePath {
 					 stack_rp.push(c.item(i));	 		 
 				 }
 			}
+			Util u = new Util();
+			global_list = u.remove_duplicates(global_list);
 			
 			hmap.put(this, global_list);
 		
@@ -280,6 +288,7 @@ public class xqRelativePath {
 		
 		else{
 			//ArrayList<Node> ale = new ArrayList<Node>();
+			//System.out.println("I am putting defualt list...............");
 	    	hmap.put(this,ale);			
 			
 		}

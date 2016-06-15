@@ -184,18 +184,6 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterX_join(@NotNull xmlParser.X_joinContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitX_join(@NotNull xmlParser.X_joinContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterFilter_eq(@NotNull xmlParser.Filter_eqContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -280,18 +268,6 @@ public class xmlBaseListener implements xmlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterList(@NotNull xmlParser.ListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitList(@NotNull xmlParser.ListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterRp_anychild(@NotNull xmlParser.Rp_anychildContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -347,18 +323,6 @@ public class xmlBaseListener implements xmlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitXLet(@NotNull xmlParser.XLetContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterString_constant(@NotNull xmlParser.String_constantContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitString_constant(@NotNull xmlParser.String_constantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -479,6 +443,18 @@ public class xmlBaseListener implements xmlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFilter_and(@NotNull xmlParser.Filter_andContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJoinattr(@NotNull xmlParser.JoinattrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJoinattr(@NotNull xmlParser.JoinattrContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -683,6 +659,18 @@ public class xmlBaseListener implements xmlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFilter_equal(@NotNull xmlParser.Filter_equalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXJoin(@NotNull xmlParser.XJoinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXJoin(@NotNull xmlParser.XJoinContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

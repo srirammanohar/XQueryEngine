@@ -4,9 +4,8 @@
 grammar xml;
 
 
-query :
-		xquery
-;
+query 			: xquery
+				;
 
 absolute_path 	: document openBracket fileName closeBracket '/' relative_path 		#apchild
 				| document openBracket fileName closeBracket '//' relative_path		#apdesc
@@ -46,73 +45,68 @@ filter			: relative_path 							#filter_rp
 				| 'not' filter								#filter_not
 				;
 
-headerString
-	:	AlphaNumeric
-	;
-nameString
-	:	AlphaNumeric
-	;
-
-AlphaNumeric
-	: [a-zA-Z_] [a-zA-Z_0-9.]*   //('a'..'z')|'A'..'Z'|'0'..'9'|'.'
-	;
-openBracket		:	'(';
-closeBracket	:	')';
+headerString	:	AlphaNumeric ('.' AlphaNumeric)*
+				;
+nameString		:	AlphaNumeric
+				;
+AlphaNumeric	: [a-zA-Z_] [a-zA-Z_0-9!-]*   //('a'..'z')|'A'..'Z'|'0'..'9'|'.'
+				;
+openBracket		:	'('
+				;
+closeBracket	:	')'
+				;
 
 
-
-xquery : var    #x_var
-   | string_constant    #x_str
-   | absolute_path     #x_ap
-   | '(' xquery ')'     #x_simple
-   | xquery ',' xquery      #xInd
-   | xquery '/' relative_path      #x_slash
-   | xquery '//' relative_path   #x_desc
-   | '<' lt=AlphaNumeric'>' '{' xquery '}' '</' rt=AlphaNumeric '>'    #x_node
-   | forClause (letClause)? (whereClause)? returnClause #x_state
-   | letClause xquery   #xLet
-   | 'join' '(' left=xquery ',' right=xquery ',' leftlist=list ',' rightlist=list ')' #x_join
-   ;
-
-list : '[' (id (',' id)*)* ']' ;
-
-id : AlphaNumeric ;
+xquery 			: var   																#x_var
+			   	| String_literal   													 	#x_str
+			   	| absolute_path     													#x_ap
+			   	| '(' xquery ')'     													#x_simple
+			   	| xquery ',' xquery      												#xInd
+			   	| xquery '/' relative_path      										#x_slash
+			   	| xquery '//' relative_path   											#x_desc
+			   	| '<' lt=nameString'>' '{' xquery '}' '</' rt=nameString '>'    		#x_node
+			   	| forClause (letClause)? (whereClause)? returnClause 					#x_state
+			   	| letClause xquery   													#xLet
+			   	| 'join' '(' left=xquery ',' right=xquery ',' leftlist=joinattr ',' rightlist=joinattr ')' #xJoin
+			   	;
+joinattr		: '[' ( id (',' id)*)* ']';
 
 
-forClause : 'for' var 'in' xquery (',' var 'in' xquery)* ;
-
-letClause : 'let' var ':=' xquery (',' var ':=' xquery)* ;
-
-whereClause : 'where' cond ;
-
-returnClause : 'return' xquery ;
-
-cond : left=xquery '=' right=xquery              #condEq
-     | left=xquery 'eq' right=xquery             #condEq
-     | left=xquery '==' right=xquery             #condIs
-     | left=xquery 'is' right=xquery             #condIs
-     | 'empty''(' xquery ')'      #condEmp
-     | 'some' var 'in' xquery (',' var 'in' xquery)* 'satisfies' cond  #condSome
-     | '(' cond ')'           #condPlain
-     | left=cond 'and' right=cond        #condAnd
-     | left=cond 'or' right=cond         #condOr
-     | 'not' cond                        #condNot
-     ;
+id 				: AlphaNumeric 
+				;
 
 
+forClause 		: 'for' var 'in' xquery (',' var 'in' xquery)* 
+				; 
+letClause 		: 'let' var ':=' xquery (',' var ':=' xquery)*
+ 				;
+whereClause 	: 'where' cond 
+				;
+returnClause 	: 'return' xquery 
+				;
 
-var : '$'AlphaNumeric;
-
-
-string_constant : '"'AlphaNumeric'"' ;
+cond 			: left=xquery '=' right=xquery             						 	#condEq
+			    | left=xquery 'eq' right=xquery             						#condEq
+			    | left=xquery '==' right=xquery             						#condIs
+			    | left=xquery 'is' right=xquery             						#condIs
+			    | 'empty''(' xquery ')'      										#condEmp
+			    | 'some' var 'in' xquery (',' var 'in' xquery)* 'satisfies' cond  	#condSome
+			    | '(' cond ')'           											#condPlain
+			    | left=cond 'and' right=cond        								#condAnd
+			    | left=cond 'or' right=cond         								#condOr
+			    | 'not' cond                       				 					#condNot
+			    ;
 
 
 
-WHITESPACE
-:
-[ \t\n\r]+ -> skip
+var 			: '$'AlphaNumeric
+				;
+String_literal 	: [^"][_A-Za-z0-9-.!;, ]*["$]
+				;
+WHITESPACE		: [\t\n\r ]+ -> skip
+				;
 
-;
+
 
 
 

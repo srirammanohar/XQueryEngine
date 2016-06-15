@@ -20,10 +20,9 @@ public class xqWhereClause {
 	
 	
 	boolean evaluateWhere(HashMap<Object, ArrayList<Node>> hmap, Node node) {
-		
-		
-		return this.where_con.evalCondition(node, hmap);
-		
+		boolean flag = this.where_con.evalCondition(node, hmap);
+		//if(flag) System.out.println(flag + "Thia ia the where clcon");
+		return flag;
 		
 		
 		

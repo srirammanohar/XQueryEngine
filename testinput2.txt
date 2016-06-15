@@ -1,0 +1,23 @@
+for $a in doc(sample2.xml)//student,
+$b in doc(sample2.xml)//student,
+$c in doc(sample2.xml)//student,
+$d in doc(sample2.xml)//parent,
+$e in doc(sample2.xml)//parent,
+$a1 in $a/lastname,
+$a2 in $a/country,
+$b1 in $b/age,
+$c1 in $c/mother,
+$c2 in $c1/ln,
+$d1 in $d/age,
+$e1 in $e/lastname
+where $a1 eq $c2 and
+$b1 eq $d1 and
+$a2 = "India"
+$e1 eq $a1 and
+return
+<tuple>
+{ $a/firstname , $c1 , $d , $e }
+</tuple>
+
+
+

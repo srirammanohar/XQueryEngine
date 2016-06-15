@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+
 public class xqAbsolutePath {
 
 	public headerFile fName;
@@ -46,7 +47,6 @@ public class xqAbsolutePath {
 			newdoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new FileInputStream(fName.file));
 		} 
 		catch(Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
         
@@ -71,7 +71,7 @@ public class xqAbsolutePath {
         				   curr_list.add(returnnode.get(k));
         			        				   
         			   }  
-        			   System.out.println("Size inside loop is " + curr_list.size());
+        			   //System.out.println("Size inside loop is " + curr_list.size());
         		}
         	}
         }
@@ -108,10 +108,13 @@ public class xqAbsolutePath {
         }
        if(hmap.containsKey(rel_path))
 		returnnode = hmap.get(rel_path);
-		System.out.println("Size returned from ab path is"+curr_list.size());
-		hmap.put(this, curr_list);
+		//System.out.println("Size returned from ab path is"+curr_list.size()+""+curr_list);
 		
-
+		ArrayList<Node> new_list=new ArrayList<Node>();
+		Util util=new Util();
+		new_list= util.remove_duplicates(curr_list);
+		//System.out.println("Size returned from ab path is"+new_list.size()+""+new_list);
+		hmap.put(this, new_list);
 	
 	
 

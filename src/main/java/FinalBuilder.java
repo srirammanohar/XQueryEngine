@@ -117,7 +117,7 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitFile_header(xmlParser.File_headerContext ctx) { 
 		
 		String fname = ctx.getText().toString();
-	    System.out.println(fname + "is the file name in exit");
+	    //System.out.println(fname + "is the file name in exit");
 	    headerFile file = new headerFile(fname);
 	    Object ob = file;
 	    map.put(ctx, ob);
@@ -185,8 +185,8 @@ public class FinalBuilder extends xmlBaseListener {
 		 xqRelativePath xqr = (xqRelativePath) map.get(ctx.relative_path().get(1));
 		 String slash = "/";
 		 xqRelativePath xqrp = new xqRelativePath(xql,slash,xqr);
-         System.out.println("Sriram is testing relative path");
-         System.out.println(xqr.tagname + "single slash");
+         //System.out.println("Sriram is testing relative path");
+         //System.out.println(xqr.tagname + "single slash");
          Object ob = xqrp;
 		 map.put(ctx,ob);
 		
@@ -255,8 +255,8 @@ public class FinalBuilder extends xmlBaseListener {
 		 xqRelativePath xqr = (xqRelativePath) map.get(ctx.relative_path().get(1));
 		 String slash = "//";
 		 xqRelativePath xqrp = new xqRelativePath(xql,slash,xqr);
-         System.out.println("Sriram is testing relative path");
-         System.out.println(xql.tagname + "single slash");
+         //System.out.println("Sriram is testing relative path");
+         //System.out.println(xql.tagname + "single slash");
          Object ob = xqrp;
 		 map.put(ctx,ob);
 		
@@ -300,7 +300,7 @@ public class FinalBuilder extends xmlBaseListener {
 		 System.out.println(xqr.tagname);
 		 String slash = ",";
 		 xqRelativePath xqrp = new xqRelativePath(xql,slash,xqr);
-		 System.out.println("Sriram is testing relative path comma");
+		 //System.out.println("Sriram is testing relative path comma");
 		 Object ob = xqrp;
 		 map.put(ctx,ob);
 		
@@ -361,7 +361,7 @@ public class FinalBuilder extends xmlBaseListener {
 		 xqFilter xqf =  (xqFilter) map.get(ctx.filter());
 		
 		 xqRelativePath xqrp = new xqRelativePath(xql,xqf);
-		 System.out.println("Sriram is testing relative path filter");
+		// System.out.println("Sriram is testing relative path filter");
 		 Object ob = xqrp;
 		 map.put(ctx,ob);
 		
@@ -444,8 +444,8 @@ public class FinalBuilder extends xmlBaseListener {
 		xqRelativePath rpl = (xqRelativePath)map.get(ctx.relative_path().get(0));
 		xqRelativePath rpr = (xqRelativePath)map.get(ctx.relative_path().get(1));
 		String str = ctx.getChild(1).getText();
-		System.out.println(rpl.tagname + "  RPL");
-		System.out.println(rpr.tagname + "  RPR");        
+		//System.out.println(rpl.tagname + "  RPL");
+		//System.out.println(rpr.tagname + "  RPR");        
 		 xqFilter xqFil =  new xqFilter(rpl,rpr,str);
 		 Object ob = xqFil;
 		 map.put(ctx,ob);
@@ -475,7 +475,7 @@ public class FinalBuilder extends xmlBaseListener {
 		//System.out.println(xql + "left");
 		//System.out.println(xqr);
 		String str = ctx.getChild(1).getText();
-		System.out.println(str + "in filter and");
+		//System.out.println(str + "in filter and");
        xqFilter xqFil =  new xqFilter(xql,xqr,str);
        Object ob = xqFil;
 		 map.put(ctx,ob);
@@ -497,8 +497,8 @@ public class FinalBuilder extends xmlBaseListener {
 		xqRelativePath rpl = (xqRelativePath)map.get(ctx.relative_path().get(0));
 		xqRelativePath rpr = (xqRelativePath)map.get(ctx.relative_path().get(1));
 		String str = ctx.getChild(1).getText();
-		System.out.println(rpl.tagname + "  RPL");
-		System.out.println(rpr.tagname + "  RPR");   
+		//System.out.println(rpl.tagname + "  RPL");
+		//System.out.println(rpr.tagname + "  RPR");   
 		 xqFilter xqFil =  new xqFilter(rpl,rpr,str);
 		 Object ob = xqFil;
 		 map.put(ctx,ob);
@@ -546,10 +546,10 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitFilter_simple(xmlParser.Filter_simpleContext ctx) { 
 		
 		 xqFilter xql  = (xqFilter)map.get(ctx.filter());
-		System.out.println(xql +  "Node in simple");
-		System.out.println(xql);
+		//System.out.println(xql +  "Node in simple");
+		//System.out.println(xql);
 		String str = ctx.getChild(1).getText();
-		System.out.println(str + "in filter simple");
+		//System.out.println(str + "in filter simple");
        xqFilter xqFil =  new xqFilter(xql);
        Object ob = xqFil;
 		 map.put(ctx,ob);
@@ -577,8 +577,8 @@ public class FinalBuilder extends xmlBaseListener {
 		 Object ob = xqFil;
 		 map.put(ctx,ob);
 		
-		System.out.println("This is eq filter test " + rpl.tagname);
-		System.out.println("This is eq filter test " + rpr.tagname);	
+		//System.out.println("This is eq filter test " + rpl.tagname);
+		//System.out.println("This is eq filter test " + rpr.tagname);	
 		
 	}
 	/**
@@ -598,10 +598,10 @@ public class FinalBuilder extends xmlBaseListener {
 
 		 xqFilter xqr  = (xqFilter)map.get(ctx.filter().get(1));
 
-		System.out.println(xql);
-		System.out.println(xqr);
+		//System.out.println(xql);
+		//System.out.println(xqr);
 		String str = ctx.getChild(1).getText();
-		System.out.println(str + "in filter or");
+		//System.out.println(str + "in filter or");
         xqFilter xqFil =  new xqFilter(xql,xqr,str);
         Object ob = xqFil;
 		 map.put(ctx,ob);
@@ -699,7 +699,7 @@ public class FinalBuilder extends xmlBaseListener {
 		xqQuery xqq = new xqQuery(left,right);
 		Object object = xqq;
 		map.put(ctx,object);
-		System.out.println("Inside comma............................");
+		//System.out.println("Inside comma............................");
 		
 		
 		
@@ -729,13 +729,7 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterX_join(xmlParser.X_joinContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitX_join(xmlParser.X_joinContext ctx) { }
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -881,8 +875,10 @@ public class FinalBuilder extends xmlBaseListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitX_node(xmlParser.X_nodeContext ctx) {
-		String left = ctx.lt.toString();
-		String right = ctx.rt.toString();
+		//System.out.println(ctx.lt.getText());
+		String left = ctx.lt.getText();
+		String right = ctx.rt.getText();
+		//System.out.println("LEFTTT"+left);
 		xqQuery xqap  = (xqQuery)map.get(ctx.xquery());
 		xqQuery xq = new xqQuery("<>{}</>", left,right, xqap);
 		Object object = xq;
@@ -927,7 +923,7 @@ public class FinalBuilder extends xmlBaseListener {
 	@Override public void exitX_str(xmlParser.X_strContext ctx) { 
 		
 		String str = ctx.getText().toString();
-		System.out.println("she sells the ");
+		//System.out.println("she sells the ");
 		xqQuery xqr = new xqQuery(str);
 		Object object = xqr;
 		map.put(ctx,object);
@@ -940,13 +936,7 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterList(xmlParser.ListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitList(xmlParser.ListContext ctx) { }
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -958,7 +948,13 @@ public class FinalBuilder extends xmlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitId(xmlParser.IdContext ctx) { }
+	@Override public void exitId(xmlParser.IdContext ctx) {
+		
+		String s = ctx.getText().toString();
+		Object o = s;
+		map.put(ctx, o);
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -979,14 +975,16 @@ public class FinalBuilder extends xmlBaseListener {
 		 for(int i=0; i<ctx.var().size() ; i++) {
 			 xqVariable v = new xqVariable(ctx.var().get(i).getText().toString());
 			 variable_list.add(v);
+			 System.out.println(v.name);
 			 
 		 }
 		 for(int i=0 ; i<ctx.xquery().size();i++){
 			 temp = (xqQuery) map.get(ctx.xquery(i));
 			 lxq.add(temp);
 		 }
-	
 		 
+	
+		// System.out.println(lxq.toString()+ "Inside builderrrrrrrrrrrrrrrrrrr");
 		 xqForClause con = new xqForClause(lxq,variable_list);
 		 Object value = con;
 		  map.put(ctx, value);	
@@ -1081,7 +1079,7 @@ public class FinalBuilder extends xmlBaseListener {
 		xqQuery xql = (xqQuery) map.get(ctx.xquery(0));
 		xqQuery xqr = (xqQuery) map.get(ctx.xquery(1));
 		String oper = "eq";
-		System.out.println("This is inside contrcut....."  + xqr.str_constant);
+		//System.out.println("This is inside contrcut....."  + xqr.str_constant);
 		Condition c= new Condition(xql,xqr,oper);
 		Object obj=c;
 		map.put(ctx, obj);	
@@ -1124,11 +1122,11 @@ public class FinalBuilder extends xmlBaseListener {
 		Condition c = (Condition) map.get(ctx.cond());
 		 List<xqQuery> lxq = new ArrayList<xqQuery>();
 		 xqQuery temp;
-		 List<String> variable_list = new ArrayList<String>();
+		 
+		 ArrayList<xqVariable> variable_list = new ArrayList<xqVariable>();
 		 for(int i=0; i<ctx.var().size() ; i++) {
-			 
-			 variable_list.add(ctx.var(i).toString());
-			 
+			 xqVariable var=new xqVariable(ctx.var().get(i).getText().toString());
+			 variable_list.add(var);
 		 }
 		 for(int i=0 ; i<ctx.xquery().size();i++){
 			 temp = (xqQuery) map.get(ctx.xquery(i));
@@ -1156,7 +1154,7 @@ public class FinalBuilder extends xmlBaseListener {
 		xqQuery xql = (xqQuery) map.get(ctx.xquery());
 		String oper="empty";
 		Condition c=new Condition(xql,oper);
-		Object ob=this;
+		Object ob=c;
 		map.put(ctx, ob);
 		
 	}
@@ -1177,7 +1175,7 @@ public class FinalBuilder extends xmlBaseListener {
 		Condition c2=(Condition) map.get(ctx.cond(1));
 		String str="and";
 		Condition c3=new Condition(c1,c2,str);
-		Object ob=this;
+		Object ob=c3;
 		map.put(ctx,ob);
 	}
 	/**
@@ -1192,11 +1190,12 @@ public class FinalBuilder extends xmlBaseListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCondOr(xmlParser.CondOrContext ctx) {
+		System.out.println(ctx.cond(0).getClass());
 		Condition c1=(Condition) map.get(ctx.cond(0));
 		Condition c2=(Condition) map.get(ctx.cond(1));
 		String str="or";
 		Condition c3=new Condition(c1,c2,str);
-		Object ob=this;
+		Object ob=c3;
 		map.put(ctx,ob);
 	}
 	/**
@@ -1214,7 +1213,7 @@ public class FinalBuilder extends xmlBaseListener {
 		Condition c1=(Condition) map.get(ctx.cond());
 		String str="()";
 		Condition c2=new Condition(c1,str);
-		Object ob=this;
+		Object ob=c2;
 		map.put(ctx,ob);
 	}
 	/**
@@ -1232,7 +1231,7 @@ public class FinalBuilder extends xmlBaseListener {
 		Condition c1=(Condition) map.get(ctx.cond());
 		String str="not";
 		Condition c2=new Condition(c1,str);
-		Object ob=this;
+		Object ob=c2;
 		map.put(ctx,ob);
 		
 	}
@@ -1259,6 +1258,56 @@ public class FinalBuilder extends xmlBaseListener {
 		
 	}
 
+	@Override public void enterXJoin(xmlParser.XJoinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXJoin(xmlParser.XJoinContext ctx) { 
+		xqQuery left = (xqQuery)map.get(ctx.xquery().get(0));
+		xqQuery right = (xqQuery)map.get(ctx.xquery().get(1));
+		//System.out.println(left + "Inside joinnn builder left");
+		//System.out.println(right + "Inside Joinnnnnnnnnnn builder");
+		xqJoinAttr leftjoin = (xqJoinAttr) map.get(ctx.leftlist);
+		xqJoinAttr rightjoin = (xqJoinAttr) map.get(ctx.rightlist);
+		String oper = "join";
+		xqQuery xqr = new xqQuery(oper,left,right,leftjoin,rightjoin );
+		
+		Object ob = xqr;
+		map.put(ctx,ob);
+		
+		//System.out.println("Parsing Tree..... exiting join");
+	}
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	
+	
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJoinattr(xmlParser.JoinattrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJoinattr(xmlParser.JoinattrContext ctx) {
+	ArrayList<String> a =  new ArrayList<String>();
+	for(int i =0; i< ctx.id().size() ;i++)
+	a.add((String) map.get(ctx.id(i)));
+	xqJoinAttr xqj = new xqJoinAttr(a);
+	Object o = xqj;
+	map.put(ctx, o);
+	
+	
+		
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *

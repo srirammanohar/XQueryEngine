@@ -17,22 +17,28 @@ public class xqForClause {
 
 	public xqForClause(List<xqQuery> lxq, List<xqVariable> variable_list) {
 		// TODO Auto-generated constructor stub
+		//System.out.println("Inside for clause constructor");
 		xqlist = lxq;
+		//System.out.println(lxq.toString());
 		varlist = variable_list;
 	}
   
-	ArrayList<Node> evalxqForClause(HashMap<Object, ArrayList<Node>> hmap , Node n , xqLetClause xqlet, xqWhereClause xqwhere, xqReturnClause xqret ) {
+	ArrayList<Node> evalxqForClause(HashMap<Object, ArrayList<Node>> hmap , Node n , xqWhereClause xqwhere, xqLetClause xqlet, xqReturnClause xqret ) {
 		
 		ArrayList<xqVariable> retu_list = new ArrayList<xqVariable>();
 		ArrayList<ArrayList<Node>> global_list = new ArrayList<ArrayList<Node>> (this.xqlist.size());
 		ArrayList<Node> inner = new ArrayList<Node>();
 		//glob_ret_list.clear();
-		System.out.println(this.xqlist.size());
+		//System.out.println(this.xqlist.size());
 		
-	evaluate_help(hmap,n,global_list,xqlet,xqwhere,xqret,0);
+		evaluate_help(hmap,n,global_list, inner, xqlet,xqwhere,xqret,0);
 		
+		ArrayList<Node> temp_list=new ArrayList<Node>(inner);
+		//temp_list.addAll(inner);
+		//System.out.println("GLOBALRETURNLIST\t\t\t\t\t\t\t\t\t"+glob_ret_list);
+		inner=new ArrayList<Node>();
 		
-		return glob_ret_list;
+		return temp_list;
 		
 		
 		
@@ -40,37 +46,52 @@ public class xqForClause {
 
 	
 	
-	public void evaluate_help(HashMap<Object, ArrayList<Node>> hmap, Node node, ArrayList<ArrayList<Node>> lista, xqLetClause xqlet, xqWhereClause xqwhere, xqReturnClause xqret , int pos) {
+	public void evaluate_help(HashMap<Object, ArrayList<Node>> hmap, Node node, ArrayList<ArrayList<Node>> lista, ArrayList<Node> a, xqLetClause xqlet, xqWhereClause xqwhere, xqReturnClause xqret , int pos) {
 		ArrayList<Node> xquery_result = new ArrayList<Node>();
 		
-		System.out.println("Inside Evaluate Help" + pos + lista.size());
+		ArrayList<Node> returnclause_list = new ArrayList<Node>();
+
+		
+		//System.out.println("Inside Evaluate Help" + pos + lista.size());
 		if(pos == xqlist.size())
-		{
-			boolean where_result = true;
-		 if(xqlet!=null) xqlet.evaluatelet(node, hmap);
+		{	boolean where_result = true;
+			//System.out.println("Inside for base case");
+			if(xqlet!=null)  {
+				
+				ArrayList<Node> letlist = a;
+				xqlet.evaluatelet(node, hmap,letlist,xqwhere,xqret);
+				a = letlist;
+			
+			}
+			
+			
+			else{
 			
 			if (xqwhere != null)
 			{
 				where_result = xqwhere.evaluateWhere(hmap, node);
+				//if(where_result)
+				//System.out.println("Came from where !!!!!!!!!!!!!!!!"+where_result);
 				
 			}
 			if(where_result == true)
 			{
-				ArrayList<Node> returnclause_list = new ArrayList<Node>();
-						xqret.evalxqRet(node, hmap);
-						returnclause_list = hmap.get(xqret);
-				//if(returnclause_list!=null)
-				//{
+				xqret.evalxqRet(node, hmap);
+				returnclause_list = hmap.get(xqret);
+				//System.out.println(returnclause_list+"Return size");
+				if(returnclause_list!=null)
+				{	//System.out.println("Adding node");
 					for(int k=0;k<returnclause_list.size();k++)
-					{   System.out.println("Inside return list");
-						glob_ret_list.add((Node)returnclause_list.get(k));
+					{   
+						a.add((Node)returnclause_list.get(k));
 					}
-				//}
+				}
 			}
-		}
+		}}
 		//else if(pos >= this.xqlist.size()) return;
 		else
-		{	System.out.println("Sizeeeeeeeeeeeeee" + pos+""+lista.size());
+		{	
+			//System.out.println("Faulting" + pos + xqlist.toString());
 			this.xqlist.get(pos).evaluatexqQuery(node, hmap);
 	         if(hmap.containsKey(this.xqlist.get(pos)))
 			 xquery_result = hmap.get(this.xqlist.get(pos));
@@ -81,10 +102,79 @@ public class xqForClause {
 				ArrayList<Node> temp = new ArrayList<Node>();
 				temp.add(lista.get(pos).get(j));
 				hmap.put(this.varlist.get(pos), temp);
-				evaluate_help(hmap,node,lista,xqlet,xqwhere,xqret,pos+1);
+				evaluate_help(hmap,node,lista, a,xqlet,xqwhere,xqret,pos+1);
 			}
+			lista.remove(pos);
 		}
 	}
+/*	public void evaluate_help(HashMap<Object, ArrayList<Node>> hmap, Node node, xqWhereClause input_where,
+			xqLetClause input_let, xqReturnClause input_return, ArrayList<ArrayList<Node>> forclause_list,ArrayList<Node> final_list,int i)
+	{
+		
+		if(i == this.xqlist.size())
+		{
+			boolean where_result = true;
+			if(input_let != null)
+				input_let.evaluatelet(node, hmap, final_list, input_where, input_return);
+			else
+			{
+				if (input_where != null)
+				{    
+					where_result = input_where.evaluateWhere(hmap, node);
+					//System.out.println("Inside where");
+				}
+				if(where_result == true)
+				{
+					
+					ArrayList<Node> returnclause_list = new ArrayList<Node>();
+							input_return.evalxqRet(node, hmap);
+							hmap.get(input_return);
+			
+					System.out.println("Size " + returnclause_list.size());
+						for(int k=0;k<returnclause_list.size();k++)
+						{
+							final_list.add((Node)returnclause_list.get(k));
+						}
+				}	
+			}
+
+		}
+		else
+		{
+			this.xqlist.get(i).evaluatexqQuery(node, hmap);
+			ArrayList<Node> xquery_result = hmap.get(this.xqlist.get(i));
+			
+			forclause_list.add(xquery_result);
+			for(int j=0;j<forclause_list.get(i).size();j++)
+			{	
+				
+				ArrayList<Node> temp = new ArrayList<Node>();
+			
+				temp.add(forclause_list.get(i).get(j));
+				
+				hmap.put(this.varlist.get(i), temp);
+				
+				evaluate_help(hmap,node,input_where,input_let,input_return,forclause_list,final_list,i+1);
+			
+			}
+			forclause_list.remove(i);
+			
+		}
+	}
+
+	public ArrayList<Node> evalxqForClause(HashMap<Object, ArrayList<Node>> evaluator_hashmap,Node node,
+			xqWhereClause input_where,xqLetClause input_let,xqReturnClause input_return)
+	{
+		ArrayList<ArrayList<Node>> forclause_list = new ArrayList<ArrayList<Node>>(xqlist.size());
+		ArrayList<xqVariable> result_list = new ArrayList<xqVariable>();
+		ArrayList<Node> final_list = new ArrayList<Node>();
+		
+		this.evaluate_help(evaluator_hashmap,node,input_where,input_let,input_return,forclause_list,final_list,0);
+		System.out.println("FOR OUTPUT " + final_list);
+		ArrayList<Node> temp_list = new ArrayList<Node>(final_list);
+		final_list=new ArrayList<Node>();
+		return temp_list;
+	}*/
 	
 	
 	

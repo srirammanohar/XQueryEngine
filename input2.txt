@@ -1,0 +1,6 @@
+for $pln in document(sample2.xml)//parent/lastname
+return
+<tuple>
+	{	<pln> { $pln } </pln>
+	}
+</tuple>

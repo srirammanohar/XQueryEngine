@@ -8,13 +8,14 @@
 
        <firstname>dinkar</firstname>
 
-     	<firstname>dinkar</firstname>
-
+     	<lastname>Peter</lastname>   	
+		<mother><ln>Peter</ln></mother>
       <nickname>dinkar</nickname>
-
+	<age>24</age>
       <marks>85</marks>
 
   </student>
+  <parent><lastname>dinkar</lastname><age>24</age></parent>
 
   <student rollno="493">
 
@@ -22,24 +23,31 @@
       <firstname>Vaneet</firstname>
 
       <lastname>Gupta</lastname>
-
+      <mother><ln>Gupta</ln></mother>
+		<age>24</age>
       <nickname>vinni</nickname>
-
+	<country>India</country>
       <marks>95</marks>
 
   </student>
+  <parent><lastname>Gupta</lastname><age>24</age></parent>
 
   <student rollno="593">
 
       <firstname>jasvir</firstname>
 
-      <lastname>singn</lastname>
+      <lastname>singh</lastname>
+       <mother><ln>singh</ln></mother>
+		<age>24</age>
+      
+		<country>Indiana</country>
 
       <nickname>jazz</nickname>
 
       <marks>90</marks>
 
   </student>
+  <parent><lastname>singh</lastname><age>42</age></parent>
 
 </class>
 
@@ -51,27 +59,40 @@
       <firstname>KD</firstname>
 
       <lastname>KD</lastname>
+      <mother><ln>singh</ln></mother>
+		<age>24</age>
+      
+		<country>Indiana</country>
 
       <nickname>di</nickname>
 
       <marks>84</marks>
 
   </student>
+  <parent><lastname>Peter</lastname><age>24</age></parent>
 
   <student rollno="93">
 
       <firstname>Va</firstname>
 
       <lastname>Gua</lastname>
+      
 
       <nickname>vii</nickname>
 
       <marks>85</marks>
 
   </student>
+  <parent><lastname>Peter</lastname></parent>
   <student>
   	<firstname>Swetha</firstname>
+  	<lastname>Krishnakumar</lastname>
+  	<mother><ln>Krishnakumar</ln></mother>
+		<age>24</age>
+      
+		<country>India</country>
   </student>
+  <parent><lastname>Krishnakumar</lastname><age>24</age></parent>
 
   <student rollno="53">
 
@@ -80,7 +101,10 @@
       <lastname>sgn</lastname>
 
       <nickname>az</nickname>
-
+		<mother><ln>Krishnakumar</ln></mother>
+		<age>24</age>
+      
+		<country>India</country>
       <marks>99</marks>
       <marks>89</marks>
 
@@ -88,9 +112,6 @@
 
 </class>
 
-<name>
-
-</name>
 
 </classes>
 

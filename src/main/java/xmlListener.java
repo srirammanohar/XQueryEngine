@@ -403,18 +403,6 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitX_ap(xmlParser.X_apContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code x_join}
-	 * labeled alternative in {@link xmlParser#xquery}.
-	 * @param ctx the parse tree
-	 */
-	void enterX_join(xmlParser.X_joinContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code x_join}
-	 * labeled alternative in {@link xmlParser#xquery}.
-	 * @param ctx the parse tree
-	 */
-	void exitX_join(xmlParser.X_joinContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code xLet}
 	 * labeled alternative in {@link xmlParser#xquery}.
 	 * @param ctx the parse tree
@@ -499,6 +487,18 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitX_simple(xmlParser.X_simpleContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code xJoin}
+	 * labeled alternative in {@link xmlParser#xquery}.
+	 * @param ctx the parse tree
+	 */
+	void enterXJoin(xmlParser.XJoinContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code xJoin}
+	 * labeled alternative in {@link xmlParser#xquery}.
+	 * @param ctx the parse tree
+	 */
+	void exitXJoin(xmlParser.XJoinContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code x_str}
 	 * labeled alternative in {@link xmlParser#xquery}.
 	 * @param ctx the parse tree
@@ -511,15 +511,15 @@ public interface xmlListener extends ParseTreeListener {
 	 */
 	void exitX_str(xmlParser.X_strContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link xmlParser#list}.
+	 * Enter a parse tree produced by {@link xmlParser#joinattr}.
 	 * @param ctx the parse tree
 	 */
-	void enterList(xmlParser.ListContext ctx);
+	void enterJoinattr(xmlParser.JoinattrContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link xmlParser#list}.
+	 * Exit a parse tree produced by {@link xmlParser#joinattr}.
 	 * @param ctx the parse tree
 	 */
-	void exitList(xmlParser.ListContext ctx);
+	void exitJoinattr(xmlParser.JoinattrContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link xmlParser#id}.
 	 * @param ctx the parse tree
@@ -676,14 +676,4 @@ public interface xmlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVar(xmlParser.VarContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link xmlParser#string_constant}.
-	 * @param ctx the parse tree
-	 */
-	void enterString_constant(xmlParser.String_constantContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link xmlParser#string_constant}.
-	 * @param ctx the parse tree
-	 */
-	void exitString_constant(xmlParser.String_constantContext ctx);
 }
